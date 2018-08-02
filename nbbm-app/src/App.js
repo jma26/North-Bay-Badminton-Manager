@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1> North Bay Badminton Group </h1>
+        <div className="signup">
+          <form>
+            <input type="text" placeholder=" Your name..." />
+            <input type="text" placeholder=" Your email address..." />
+            <input type="password" placeholder=" Your password..." />
+            <input type="password" placeholder=" Password again..." />
+            <input type="submit" value="Sign up!" />
+          </form>
+        </div>
       </div>
     );
   }
