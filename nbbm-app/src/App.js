@@ -8,6 +8,7 @@ class App extends Component {
         <h1> North Bay Badminton Group </h1>
         <div className="signup">
           <form>
+            <h2> Sign up </h2>
             <input type="text" placeholder=" Your name..." />
             <input type="text" placeholder=" Your email address..." />
             <input type="password" placeholder=" Your password..." />
