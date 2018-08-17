@@ -16,12 +16,12 @@ class App extends Component {
           <form>
             <div>
               <label className={['user', 'input-field'].join(' ')} >
-                <input type="text" placeholder="Enter Full Name" />
+                <input type="text" placeholder="Enter Full Name" autoComplete="disabled" />
               </label>
             </div>
             <div>
               <label className={['email', 'input-field'].join(' ')}>
-                <input type="text" placeholder="Email Address" />
+                <input type="text" placeholder="Email Address" autoComplete="disabled" />
               </label>
             </div>
             <div>
