@@ -11,7 +11,7 @@ class Register extends Component {
   render() {
     return (
       <div className="Register">
-        <h1 className="register-title"> North Bay Badminton Group </h1>
+        <h1 className="app-title"> North Bay Badminton Group </h1>
         <div className="signup">
           <form className="register-form">
             <div>
