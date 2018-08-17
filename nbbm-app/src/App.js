@@ -1,19 +1,42 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUser, faEnvelope, faLock);
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1> North Bay Badminton Group </h1>
+        <h1 className="app-title"> North Bay Badminton Group </h1>
         <div className="signup">
           <form>
-            <h2> Sign up </h2>
-            <input type="text" placeholder=" Your name..." />
-            <input type="text" placeholder=" Your email address..." />
-            <input type="password" placeholder=" Your password..." />
-            <input type="password" placeholder=" Password again..." />
-            <input type="submit" value="Sign up!" />
+            <div>
+              <label className={['user', 'input-field'].join(' ')} >
+                <input type="text" placeholder="Enter Full Name" />
+              </label>
+            </div>
+            <div>
+              <label className={['email', 'input-field'].join(' ')}>
+                <input type="text" placeholder="Email Address" />
+              </label>
+            </div>
+            <div>
+              <label className={['password', 'input-field'].join(' ')}>
+                <FontAwesomeIcon className="password" icon="lock" />
+                <input type="password" placeholder="Password" />
+              </label>
+            </div>
+            <div>
+              <label className={['password', 'input-field'].join(' ')}>
+                <FontAwesomeIcon className="password" icon="lock" />
+                <input type="password" placeholder="Confirm Password" />
+              </label>
+            </div>
+            <input type="submit" value="Register" />
           </form>
         </div>
       </div>

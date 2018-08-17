@@ -1,36 +1,78 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
 .App {
+  background-color: #222431;
+  min-width: 100%;
+  min-height: 100vh;
   text-align: center;
 }
 
+.app-title {
+  color: #4BBACA;
+}
+
+.icon {
+  display: inline;
+}
+
 form {
-  border: 2px solid black;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 16px;
 }
 
+.input-field {
+  border-bottom: medium solid #4EB8CE;
+  color: #58AEC1;
+  font-size: 20px;
+  padding: 7px;
+}
+
+.user:before {
+  content: '\f007';
+  font-family: 'Font Awesome\ 5 Free';
+}
+
+.email:before {
+  content: '\f0e0';
+  font-family: 'Font Awesome\ 5 Free';
+}
+
+.password {
+  color: #4EB8CE;
+}
+
 input[type="text"], input[type="password"] {
+  border: 0px;
+  border-bottom: medium solid #4EB8CE;
+  background-color: #222431;
+  color: white;
   margin: 16px 0px;
+  outline: 0px;
+  padding: 8px;
   width: 200px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+input[type="submit"] {
+  background-color: #4EB8CE;
+  border: none;
+  color: #FFFFFF;
+  padding: 12px 64px;
 }
 
-.App-title {
-  font-size: 1.5em;
+input[type="submit"]:hover {
+  cursor: pointer;
 }
 
-.App-intro {
-  font-size: large;
+input[type="submit"]:focus {
+  transform: translateY(3px);
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+::placeholder {
+  color: #4EB8CE;
 }
