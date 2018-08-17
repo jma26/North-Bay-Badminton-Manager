@@ -6,7 +6,7 @@
 
 .App {
   background-color: #222431;
-  min-width: 100%;
+  min-width: 300px;
   min-height: 100vh;
   text-align: center;
 }
@@ -29,7 +29,7 @@ form {
 .input-field {
   border-bottom: medium solid #4EB8CE;
   color: #58AEC1;
-  font-size: 20px;
+  font-size: 24px;
   padding: 7px;
 }
 
@@ -49,13 +49,17 @@ form {
 
 input[type="text"], input[type="password"] {
   border: 0px;
-  border-bottom: medium solid #4EB8CE;
   background-color: #222431;
   color: white;
+  font-size: 16px;
   margin: 16px 0px;
   outline: 0px;
   padding: 8px;
   width: 200px;
+}
+
+input[type="text"]:focus {
+  border-color: #4EB8CE;
 }
 
 input[type="submit"] {
@@ -63,6 +67,7 @@ input[type="submit"] {
   border: none;
   color: #FFFFFF;
   padding: 12px 64px;
+  width: 235px;
 }
 
 input[type="submit"]:hover {
