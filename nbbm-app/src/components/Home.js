@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
 
-import { Route, Link, Switch } from 'react-router-dom';
-
 import HomeLinks from './HomeLinks';
 
 class Home extends Component {

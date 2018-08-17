@@ -12,7 +12,7 @@ class Register extends Component {
     return (
       <div className="Register">
         <h1 className="app-title"> North Bay Badminton Group </h1>
-        <div className="signup">
+        <div className="register-container">
           <form className="register-form">
             <div>
               <label className={['user', 'input-field'].join(' ')} >
