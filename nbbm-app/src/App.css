@@ -72,10 +72,11 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   cursor: pointer;
+  transform: translateY(2px);
 }
 
 input[type="submit"]:focus {
-  transform: translateY(3px);
+  transform: translateY(4px);
 }
 
 ::placeholder {
