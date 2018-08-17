@@ -1,0 +1,35 @@
+.HomeLinks nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homelinks-inactive {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.homelinks {
+  border: none;
+  display: inline-block;
+  margin: 8px 0px;
+  width: 235px;
+}
+
+.homelinks-login {
+  background-color: #4EB8CE;
+}
+
+.homelinks-register {
+  background-color: #222431;
+  border: 2px solid #4EB8CE;
+}
+
+.homelinks:hover, .homelinks-inactive:hover {
+  cursor: pointer;
+  transform: translateY(2px);
+}
+
+.homelinks:focus {
+  transform: translateY(4px);
+}
