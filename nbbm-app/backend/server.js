@@ -1,18 +1,16 @@
 const express = require('express');
-const http = require('http');
 const socketIo = require('socket.io');
 const app = express();
 
-const server = http.createServer(app);
+// Port 
+const port = process.env.PORT || 8000;
+// Have server to listen to port
+const server = app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+})
+// Pass the same server object to socketIo
 const io = socketIo(server);
 
 io.on('connection', (socket) => {
-  
+  console.log(socket.id);
 })
-
-const port = process.env.PORT || 8000;
-app.listen(port, () => {
-  console.log('listening on port', port);
-})
-
-
