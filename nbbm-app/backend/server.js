@@ -13,4 +13,9 @@ const io = socketIo(server);
 
 io.on('connection', (socket) => {
   console.log(socket.id);
+  // Receive message
+  socket.on('send_message', (data) => {
+    console.log(data);
+    io.emit('receive_message', data);
+  })
 })
