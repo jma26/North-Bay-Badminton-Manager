@@ -14,8 +14,13 @@ class SocketChat extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({
-      'messages': [...this.state.messages, this.state.message]
+      'messages': [...this.state.messages, this.state.message],
+      'message': ''
     })
+    this.socket.emit('send message', {
+      message: this.state.message
+    })
+    
   }
 
   render() {
