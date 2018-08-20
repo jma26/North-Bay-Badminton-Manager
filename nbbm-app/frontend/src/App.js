@@ -12,10 +12,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {/* Home component will always render */}
         <Route exact path="/" component={ Home } />
-        <Route path="/register" component={ Register } />
-        <Route path="/login" component={ Login } />
-        <Route path="/platform" component={ Platform } />
+        <Switch>
+          <Route path="/register" component={ Register } />
+          <Route path="/login" component={ Login } />
+          <Route path="/platform" component={ Platform } />
+        </Switch>
       </div>
     );
   }
