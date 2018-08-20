@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
-class ChatMessages extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="ChatMessages">
-      </div>
-    )
-  }
+function ChatMessages(props) {
+  return (
+    <div className="ChatMessages">
+    {
+      props.chatHistory.map((message) => 
+        <p> {message} </p>
+      )
+    }
+    </div>
+  )
 }
 
 export default ChatMessages;
