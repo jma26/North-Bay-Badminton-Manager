@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './SocketChat.css';
 import io from 'socket.io-client';
 
 import ChatMessages from './ChatMessages.js';
@@ -31,13 +32,17 @@ class SocketChat extends Component {
   render() {
     return (
       <div className="SocketChat">
-        <h2> Community Chat </h2>
+        <h2 className="SocketChat-headline"> Community Chat </h2>
         <div className="chat-box">
-          <ChatMessages chatHistory={this.state.messages} />
-          <form onSubmit={(e) => this.handleSubmit(e)} >
-            <input type="text" name="message" value={this.state.message} onChange={(e) => this.setState({message: e.target.value})} placeholder="New Message" />
-            <input type="submit" value="Send" />
-          </form>
+          <div className="chatbox-container">
+            <ChatMessages chatHistory={this.state.messages} />
+            <div className="formChat-container">
+              <form className="formChat" onSubmit={(e) => this.handleSubmit(e)} >
+                <input type="text" name="message" value={this.state.message} onChange={(e) => this.setState({message: e.target.value})} placeholder="New Message" />
+                <input type="submit" value="Send" />
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     )

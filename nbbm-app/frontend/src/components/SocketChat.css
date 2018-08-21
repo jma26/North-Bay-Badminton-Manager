@@ -4,3 +4,49 @@
   min-height: 100vh;
   text-align: center;
 }
+
+.SocketChat-headline {
+  color: #FFFFFF;
+}
+
+.chat-box {
+  border: 2px solid #FFFFFF;
+  height: 75vh;
+  min-width: 500px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.chatbox-container {
+  border-left: 2px solid #FFFFFF;
+  float: right;
+  height: 100%;
+  overflow: auto;
+  width: 75%;
+}
+
+.formChat-container {
+  border-top: 2px solid #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formChat {
+  margin-top: 16px;
+}
+
+.formChat input[type="submit"]:hover {
+  background-color: #3E93A4;
+  transform: none;
+}
+
+.formChat input[type="submit"]:focus {
+  transform: none;
+}
+
+.formChat input[type="text"] {
+  font-size: 16px;
+  padding: 8px;
+  width: 600px;
+}

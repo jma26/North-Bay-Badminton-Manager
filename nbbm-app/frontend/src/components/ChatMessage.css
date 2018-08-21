@@ -1,0 +1,9 @@
+.message {
+  color: #FFFFFF;
+}
+
+.ChatMessages {
+  width: 100%;
+  overflow: auto;
+  height: 90%;
+}
