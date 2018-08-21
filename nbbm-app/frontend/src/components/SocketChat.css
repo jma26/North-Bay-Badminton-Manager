@@ -2,11 +2,11 @@
   background-color: #222431;
   min-width: 300px;
   min-height: 100vh;
-  text-align: center;
 }
 
 .SocketChat-headline {
   color: #FFFFFF;
+  text-align: center;
 }
 
 .chat-box {
@@ -49,4 +49,5 @@
   font-size: 16px;
   padding: 8px;
   width: 600px;
+  margin-right: 8px;
 }

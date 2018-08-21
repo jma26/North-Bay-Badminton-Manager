@@ -11,10 +11,10 @@ class Platform extends Component {
       <div className="Platform">
         <nav>
           <button className="platformlinks-chat platformlinks">
-            <Link to="/platform/home"> Home </Link>
+            <Link to="/platform/home" style={{textDecoration: 'none'}}> Home </Link>
           </button>
           <button className="platformlinks-chat platformlinks">
-            <Link to="/platform/chat"> Chatroom </Link>
+            <Link to="/platform/chat" style={{textDecoration: 'none'}}> Chatroom </Link>
           </button>
         </nav>
         <Route path="/platform/home" component={ PlatformHome } />

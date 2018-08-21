@@ -2,5 +2,12 @@
   background-color: #222431;
   min-width: 300px;
   min-height: 100vh;
-  text-align: center;
+}
+
+.Platform nav {
+  padding: 16px;
+}
+
+.Platform nav button {
+  padding: 4px;
 }
