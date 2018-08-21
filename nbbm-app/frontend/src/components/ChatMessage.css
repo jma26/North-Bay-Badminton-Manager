@@ -7,3 +7,22 @@
   overflow: auto;
   height: 90%;
 }
+
+/* Custom Scroll bar */
+.ChatMessages::-webkit-scrollbar-track
+{
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.ChatMessages::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.ChatMessages::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: #4EB8CE;
+}
