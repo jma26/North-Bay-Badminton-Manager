@@ -13,7 +13,7 @@
   border: 2px solid #FFFFFF;
   height: 75vh;
   min-width: 500px;
-  max-width: 1200px;
+  max-width: 975px;
   margin: 0 auto;
 }
 
@@ -21,31 +21,37 @@
   border-left: 2px solid #FFFFFF;
   float: right;
   height: 100%;
-  overflow: auto;
+  overflow-y: hidden;
   width: 75%;
 }
 
-.formChat-container {
-  border-top: 2px solid #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .formChat {
-  margin-top: 16px;
+  display: flex;
+  border-top: 2px solid #FFFFFF;
+  justify-content: center;
+  padding: 8px;
 }
 
-.formChat input[type="submit"]:hover {
+.send-button {
+  background-color: #4EB8CE;
+  border: none;
+  color: #FFFFFF;
+  font-size: 16px;
+  padding: 8px;
+  width: 100px;
+}
+
+.send-button:hover {
   background-color: #3E93A4;
   transform: none;
 }
 
-.formChat input[type="submit"]:focus {
+.send-button:focus {
   transform: none;
 }
 
 .formChat input[type="text"] {
+  border: none;
   font-size: 16px;
   padding: 8px;
   width: 600px;

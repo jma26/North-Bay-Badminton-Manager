@@ -36,12 +36,10 @@ class SocketChat extends Component {
         <div className="chat-box">
           <div className="chatbox-container">
             <ChatMessages chatHistory={this.state.messages} />
-            <div className="formChat-container">
               <form className="formChat" onSubmit={(e) => this.handleSubmit(e)} >
-                <input type="text" name="message" value={this.state.message} onChange={(e) => this.setState({message: e.target.value})} placeholder="New Message" />
-                <input type="submit" value="Send" />
+                <input type="text" name="message" value={this.state.message} onChange={(e) => this.setState({message: e.target.value})} placeholder="New Message" className="message-input" />
+                <input type="submit" value="Send" className="send-button" />
               </form>
-            </div>
           </div>
         </div>
       </div>
