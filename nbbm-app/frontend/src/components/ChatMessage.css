@@ -4,8 +4,8 @@
 
 .ChatMessages {
   width: 100%;
-  overflow: auto;
-  height: 90%;
+  overflow-y: auto;
+  height: 93%;
 }
 
 /* Custom Scroll bar */
