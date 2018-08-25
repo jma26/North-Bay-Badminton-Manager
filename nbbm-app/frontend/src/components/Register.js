@@ -36,7 +36,7 @@ class Register extends Component {
                 <input type="password" placeholder="Confirm Password" className="input-password" />
               </label>
             </div>
-            <input type="submit" value="Register" />
+            <input type="submit" value="Register" class="register-button" />
           </form>
         </div>
       </div>

@@ -56,7 +56,7 @@
   border-color: #4EB8CE;
 }
 
-input[type="submit"] {
+.register-button {
   background-color: #4EB8CE;
   border: none;
   color: #FFFFFF;
@@ -64,12 +64,12 @@ input[type="submit"] {
   width: 235px;
 }
 
-input[type="submit"]:hover {
+.register-button:hover {
   cursor: pointer;
   transform: translateY(2px);
 }
 
-input[type="submit"]:focus {
+.register-button:focus {
   transform: translateY(4px);
 }
 
