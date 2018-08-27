@@ -1,6 +1,15 @@
+const mysql = require('mysql');
 const express = require('express');
 const socketIo = require('socket.io');
 const app = express();
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'NorthBayBadminton',
+  port: 3306
+});
 
 // Port 
 const port = process.env.PORT || 8000;
@@ -8,6 +17,13 @@ const port = process.env.PORT || 8000;
 const server = app.listen(port, () => {
   console.log(`listening on port ${port}`);
 })
+
+// MySQL connection
+connection.connect((err) => {
+  if (err) throw err;
+  console.log('MySQL connection successful!');
+})
+
 // Pass the same server object to socketIo
 const io = socketIo(server);
 
