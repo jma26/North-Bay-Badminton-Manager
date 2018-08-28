@@ -15,6 +15,7 @@ class Register extends Component {
       'fullName': '',
       'email': '',
       'password': '',
+      'confirmpassword': ''
     }
   }
 
@@ -34,12 +35,13 @@ class Register extends Component {
         user = firebaseApp.auth().currentUser;
       }).then(() => {
         user.updateProfile({
-          displayName: this.state.fullname
+          displayName: this.state.fullName
         })
         this.setState({
           'fullName': '',
           'email': '',
           'password': '',
+          'confirmpassword': ''
         })
         console.log(user);
       })
@@ -54,7 +56,7 @@ class Register extends Component {
           <form className="register-form" onSubmit={(e) => this.handleRegistration(e)}>
             <div>
               <label className={['user', 'input-field'].join(' ')} >
-                <input type="text" name="fullname" placeholder="Enter Full Name" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
+                <input type="text" name="fullName" value={this.state.fullName} placeholder="Enter Full Name" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
             </div>
             <div>
@@ -71,7 +73,7 @@ class Register extends Component {
             <div>
               <label className={['password', 'input-field'].join(' ')}>
                 <FontAwesomeIcon className="password" icon="lock" />
-                <input type="password" name="confirmpassword" placeholder="Confirm Password" className="input-password" />
+                <input type="password" name="confirmpassword" value={this.state.confirmpassword} onChange={(e) => this.handleChange(e)} placeholder="Confirm Password" className="input-password" />
               </label>
             </div>
             <input type="submit" value="Register" className="register-button" />
