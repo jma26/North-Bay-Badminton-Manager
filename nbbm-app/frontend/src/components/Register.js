@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Register.css';
 
+import firebaseApp from '../config/firebase';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
@@ -8,35 +9,67 @@ import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 library.add(faUser, faEnvelope, faLock);
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      'fullName': '',
+      'email': '',
+      'password': '',
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleRegistration(e) {
+    e.preventDefault();
+    console.log(this.state);
+    try {
+      const user = firebaseApp
+        .auth()
+        .createUserWithEmailAndPassword(this.state.email, this.state.password);
+    } catch (error) {
+      alert(error);
+    }
+    this.setState({
+      'fullname': '',
+      'email': '',
+      'password': ''
+    })
+  }
+
   render() {
     return (
       <div className="Register">
         <h1 className="app-title"> North Bay Badminton Group </h1>
         <div className="register-container">
-          <form className="register-form">
+          <form className="register-form" onSubmit={(e) => this.handleRegistration(e)}>
             <div>
               <label className={['user', 'input-field'].join(' ')} >
-                <input type="text" placeholder="Enter Full Name" autoComplete="disabled" className="input-text" />
+                <input type="text" name="fullname" placeholder="Enter Full Name" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
             </div>
             <div>
               <label className={['email', 'input-field'].join(' ')}>
-                <input type="text" placeholder="Email Address" autoComplete="disabled" className="input-text" />
+                <input type="text" name="email" placeholder="Email Address" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
             </div>
             <div>
               <label className={['password', 'input-field'].join(' ')}>
                 <FontAwesomeIcon className="password" icon="lock" />
-                <input type="password" placeholder="Password" className="input-password" />
+                <input type="password" name="password" onChange={(e) => this.handleChange(e)} placeholder="Password" className="input-password" />
               </label>
             </div>
             <div>
               <label className={['password', 'input-field'].join(' ')}>
                 <FontAwesomeIcon className="password" icon="lock" />
-                <input type="password" placeholder="Confirm Password" className="input-password" />
+                <input type="password" name="confirmpassword" placeholder="Confirm Password" className="input-password" />
               </label>
             </div>
-            <input type="submit" value="Register" class="register-button" />
+            <input type="submit" value="Register" className="register-button" />
           </form>
         </div>
       </div>
