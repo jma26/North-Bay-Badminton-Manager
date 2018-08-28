@@ -1,3 +1,15 @@
+input:-webkit-autofill {
+  box-shadow: 0 0 0 50px #222431 inset;
+  -webkit-box-shadow: 0 0 0 50px #222431 inset;
+  -webkit-text-fill-color: #FFFFFF;
+}
+
+input:-webkit-autofill:focus, input:-webkit-autofill:active {
+  box-shadow: 0 0 0 50px #222431 inset;
+  -webkit-box-shadow: 0 0 0 50px #222431 inset;
+  -webkit-text-fill-color: #FFFFFF;
+}  
+
 .Register {
   background-color: #222431;
   min-width: 300px;
