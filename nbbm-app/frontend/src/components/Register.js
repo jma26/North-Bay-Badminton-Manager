@@ -25,20 +25,25 @@ class Register extends Component {
   }
 
   handleRegistration(e) {
+    let user = null;
     e.preventDefault();
     console.log(this.state);
-    try {
-      const user = firebaseApp
-        .auth()
-        .createUserWithEmailAndPassword(this.state.email, this.state.password);
-    } catch (error) {
-      alert(error);
-    }
-    this.setState({
-      'fullname': '',
-      'email': '',
-      'password': ''
-    })
+    firebaseApp
+      .auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => {
+        user = firebaseApp.auth().currentUser;
+      }).then(() => {
+        user.updateProfile({
+          displayName: this.state.fullname
+        })
+        this.setState({
+          'fullName': '',
+          'email': '',
+          'password': '',
+        })
+        console.log(user);
+      })
+      .catch((error) => console.log(error));
   }
 
   render() {
@@ -54,13 +59,13 @@ class Register extends Component {
             </div>
             <div>
               <label className={['email', 'input-field'].join(' ')}>
-                <input type="text" name="email" placeholder="Email Address" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
+                <input type="text" name="email" value={this.state.email} placeholder="Email Address" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
             </div>
             <div>
               <label className={['password', 'input-field'].join(' ')}>
                 <FontAwesomeIcon className="password" icon="lock" />
-                <input type="password" name="password" onChange={(e) => this.handleChange(e)} placeholder="Password" className="input-password" />
+                <input type="password" name="password" value={this.state.password} onChange={(e) => this.handleChange(e)} placeholder="Password" className="input-password" />
               </label>
             </div>
             <div>
