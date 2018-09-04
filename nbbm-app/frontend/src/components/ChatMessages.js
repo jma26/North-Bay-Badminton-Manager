@@ -2,14 +2,16 @@ import React from 'react';
 import './ChatMessage.css';
 
 function ChatMessages(props) {
-
+  
   return (
     <div className="ChatMessages">
+      <ol>
     {
       props.chatHistory.map((message) => 
-        <p className="message"> {message} </p>
+        <li className="message"> {message} </li>
       )
     }
+      </ol>
     </div>
   )
 }

@@ -1,5 +1,13 @@
+ol {
+  list-style: none;
+}
+
 .message {
+  background-color: #4EB8CE;
+  border-radius: 12px;
   color: #FFFFFF;
+  margin: 8px;
+  padding: 8px;
 }
 
 .ChatMessages {
