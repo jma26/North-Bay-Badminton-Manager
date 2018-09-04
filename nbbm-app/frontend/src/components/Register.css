@@ -17,6 +17,18 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active {
   text-align: center;
 }
 
+.register-back-button {
+  border-color: #4EB8CE;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.back-button {
+  background-color: #222431;
+  color: white;
+}
+
 .app-title {
   color: #4BBACA;
 }

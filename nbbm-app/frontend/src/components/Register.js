@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './Register.css';
 
+import { Link } from 'react-router-dom';
+
 import firebaseApp from '../config/firebase';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faEnvelope, faLock, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUser, faEnvelope, faLock);
+library.add(faUser, faEnvelope, faLock, faAngleLeft);
 
 class Register extends Component {
   constructor(props) {
@@ -15,7 +17,8 @@ class Register extends Component {
       'fullName': '',
       'email': '',
       'password': '',
-      'confirmpassword': ''
+      'confirmpassword': '',
+      'successful_registration': false
     }
   }
 
@@ -33,6 +36,9 @@ class Register extends Component {
       .auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
         user = firebaseApp.auth().currentUser;
+        this.setState({
+          'successful_registration': true
+        })
       }).then(() => {
         user.updateProfile({
           displayName: this.state.fullName
@@ -41,7 +47,8 @@ class Register extends Component {
           'fullName': '',
           'email': '',
           'password': '',
-          'confirmpassword': ''
+          'confirmpassword': '',
+          'successful_registration': false
         })
         console.log(user);
       })
@@ -51,6 +58,9 @@ class Register extends Component {
   render() {
     return (
       <div className="Register">
+        <button className="register-back-button">
+          <Link exact="true" to="/login"><FontAwesomeIcon className="back-button" icon="angle-left" size="2x" /></Link>
+        </button>
         <h1 className="app-title"> North Bay Badminton Group </h1>
         <div className="register-container">
           <form className="register-form" onSubmit={(e) => this.handleRegistration(e)}>
