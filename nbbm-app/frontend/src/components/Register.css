@@ -17,14 +17,14 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active {
   text-align: center;
 }
 
-.register-back-button {
+.back-button {
   border-color: #4EB8CE;
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.back-button {
+.angle-left-icon {
   background-color: #222431;
   color: white;
 }
@@ -80,7 +80,7 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active {
   border-color: #4EB8CE;
 }
 
-.register-button {
+.register-button, .login-button {
   background-color: #4EB8CE;
   border: none;
   color: #FFFFFF;
@@ -88,12 +88,12 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active {
   width: 235px;
 }
 
-.register-button:hover {
+.register-button:hover, .login-button:hover {
   cursor: pointer;
   transform: translateY(2px);
 }
 
-.register-button:focus {
+.register-button:focus, .login-button:focus {
   transform: translateY(4px);
 }
 

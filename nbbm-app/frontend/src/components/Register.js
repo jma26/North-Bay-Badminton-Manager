@@ -58,8 +58,8 @@ class Register extends Component {
   render() {
     return (
       <div className="Register">
-        <button className="register-back-button">
-          <Link exact="true" to="/login"><FontAwesomeIcon className="back-button" icon="angle-left" size="2x" /></Link>
+        <button className="back-button">
+          <Link exact="true" to="/"><FontAwesomeIcon className="angle-left-icon" icon="angle-left" size="2x" /></Link>
         </button>
         <h1 className="app-title"> North Bay Badminton Group </h1>
         <div className="register-container">
