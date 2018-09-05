@@ -6,6 +6,20 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      'email': '',
+      'password': ''
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
   render() {
     if (this.props.location.state) {
       alert('Successful Registration! Login below to');
@@ -21,13 +35,13 @@ class Login extends Component {
           <form className="login-form">
             <div>
               <label className={['email', 'input-field'].join(' ')}>
-                <input type="text" placeholder="Email Address" autoComplete="disabled" className="input-text" />
+                <input type="text" name="email" value={this.state.email} placeholder="Email Address" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
             </div>
             <div>
               <label className={['password', 'input-field'].join(' ')}>
                 <FontAwesomeIcon className="password" icon="lock" />
-                <input type="password" placeholder="Password" className="input-password" />
+                <input type="password" name="password" value={this.state.password} placeholder="Password" onChange={(e) => this.handleChange(e)} className="input-password" />
               </label>
             </div>
             <input type="submit" value="Sign in" className="login-button"/>
