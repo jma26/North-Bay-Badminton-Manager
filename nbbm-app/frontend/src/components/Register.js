@@ -48,11 +48,22 @@ class Register extends Component {
           'email': '',
           'password': '',
           'confirmpassword': '',
-          'successful_registration': false
+        })
+        this.props.history.push({
+          pathname: '/login',
+          state: {
+            'successful_registration': this.state.successful_registration
+          }
         })
         console.log(user);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        this.setState({
+          'password': '',
+          'confirmpassword': ''
+        })
+      });
   }
 
   render() {
