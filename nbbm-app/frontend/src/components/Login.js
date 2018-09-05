@@ -7,6 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Login extends Component {
   render() {
+    if (this.props.location.state) {
+      alert('Successful Registration! Login below to');
+    }
+
     return (
       <div className="Login">
         <button className="back-button">
