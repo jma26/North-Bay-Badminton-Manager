@@ -3,7 +3,7 @@ import './Login.css';
 
 import { Link } from 'react-router-dom';
 
-import firebaseApp from '../config/firebase';
+import { firebaseApp } from '../config/firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Login extends Component {
@@ -50,8 +50,9 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.location.state) {
+    if (this.props.location.state.successful_registration) {
       alert('Successful Registration! Login below to');
+      this.props.location.state.successful_registration = false;   
     }
 
     return (

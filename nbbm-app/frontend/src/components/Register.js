@@ -3,7 +3,7 @@ import './Register.css';
 
 import { Link } from 'react-router-dom';
 
-import firebaseApp from '../config/firebase';
+import { fireStore, firebaseApp} from '../config/firebase';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
@@ -36,6 +36,10 @@ class Register extends Component {
       .auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
         user = firebaseApp.auth().currentUser;
+        fireStore.collection('users').add({
+          fullName: this.state.fullName,
+          email: this.state.email,
+        })
         this.setState({
           'successful_registration': true
         })
