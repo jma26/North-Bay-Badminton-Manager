@@ -3,6 +3,7 @@ import './Login.css';
 
 import { Link } from 'react-router-dom';
 
+import firebaseApp from '../config/firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Login extends Component {
@@ -20,6 +21,34 @@ class Login extends Component {
     })
   }
 
+  handleLogin(e) {
+    let user = null;
+    e.preventDefault();
+    firebaseApp
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then((userCredentials) => {
+      user = userCredentials;
+      console.log(user);
+      this.setState({
+        'password': '',
+        'email': ''
+      })
+      this.props.history.push({
+        pathname: '/platform',
+        state: {
+          'user': user.user.displayName,
+          'email': user.user.email
+        }
+      })
+    }).catch((error) => {
+      console.log(error);
+      this.setState({
+        'password': ''
+      })
+    })
+  }
+
   render() {
     if (this.props.location.state) {
       alert('Successful Registration! Login below to');
@@ -32,7 +61,7 @@ class Login extends Component {
         </button>
         <h1 className="app-title"> North Bay Badminton Group </h1>
         <div className="login-container">
-          <form className="login-form">
+          <form className="login-form" onSubmit={(e) => this.handleLogin(e)}>
             <div>
               <label className={['email', 'input-field'].join(' ')}>
                 <input type="text" name="email" value={this.state.email} placeholder="Email Address" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
