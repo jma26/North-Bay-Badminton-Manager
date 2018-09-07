@@ -35,7 +35,7 @@ class Login extends Component {
         'email': ''
       })
       this.props.history.push({
-        pathname: '/platform',
+        pathname: '/platform/home',
         state: {
           'user': user.user.displayName,
           'email': user.user.email

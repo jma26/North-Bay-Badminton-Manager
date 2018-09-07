@@ -55,7 +55,7 @@ class Register extends Component {
             'confirmpassword': '',
           })
           this.props.history.push({
-            pathname: '/platform',
+            pathname: '/platform/home',
             state: {
               'user': user.displayName,
               'email': user.email
