@@ -47,19 +47,21 @@ class Register extends Component {
         user.updateProfile({
           displayName: this.state.fullName
         })
-        this.setState({
-          'fullName': '',
-          'email': '',
-          'password': '',
-          'confirmpassword': '',
+        .then(() => {
+          this.setState({
+            'fullName': '',
+            'email': '',
+            'password': '',
+            'confirmpassword': '',
+          })
+          this.props.history.push({
+            pathname: '/platform',
+            state: {
+              'user': user.displayName,
+              'email': user.email
+            }
+          })
         })
-        this.props.history.push({
-          pathname: '/login',
-          state: {
-            'successful_registration': this.state.successful_registration
-          }
-        })
-        console.log(user);
       })
       .catch((error) => {
         console.log(error);
