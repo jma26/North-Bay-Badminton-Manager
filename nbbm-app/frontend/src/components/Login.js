@@ -50,11 +50,6 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.location.state.successful_registration) {
-      alert('Successful Registration! Login below to');
-      this.props.location.state.successful_registration = false;   
-    }
-
     return (
       <div className="Login">
         <button className="back-button">
