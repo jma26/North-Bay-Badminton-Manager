@@ -58,6 +58,16 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    // Load script for google sign-in button to appear
+    (function() {
+      let e = document.createElement('script');
+      e.type= "text/javascript";
+      e.async = true;
+      e.src = "https://apis.google.com/js/platform.js";
+      let t = document.getElementsByTagName("script")[0];
+      t.parentNode.insertBefore(e, t)
+    })();
+    
     window.gapi.load('auth2', () => {
       let auth2 = window.gapi.auth2.init({
         client_id: "639843179540-b5t5jbeng5l0hoa97p4bjaj04bsburvr.apps.googleusercontent.com",
