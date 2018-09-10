@@ -49,12 +49,17 @@ class Login extends Component {
     })
   }
 
-  onGoogleSignIn(success) {
-    console.log(success);
-  }
-
-  onGoogleSignInFailure(error) {
-    console.log(error);
+  googleLogin() {
+    console.log('googleLogin() detected!');
+    // Initialize auth2 to be fulfilled by a GoogleAuth object
+    let auth2 = window.gapi.auth2.getAuthInstance();
+    // Sign the user in
+    auth2.signIn().then(() => {
+      // Use currentUser to return a GoogleUser object and call getBasicProfile() with it
+      let profile = auth2.currentUser.get().getBasicProfile();
+      console.log(profile.getName());
+      console.log(profile.getEmail());
+    })
   }
 
   componentDidMount() {
@@ -67,14 +72,16 @@ class Login extends Component {
       let t = document.getElementsByTagName("script")[0];
       t.parentNode.insertBefore(e, t)
     })();
-    
+
+    // Load auth2
     window.gapi.load('auth2', () => {
-      let auth2 = window.gapi.auth2.init({
+      window.gapi.auth2.init({
         client_id: "639843179540-b5t5jbeng5l0hoa97p4bjaj04bsburvr.apps.googleusercontent.com",
-        fetch_basic_profile: true,
         scope: "profile email"
-      });
-      auth2.then(this.onGoogleSignIn, this.onGoogleSignInFailure)
+      })
+      .then((auth2) => {
+        console.log('Signed in: ', auth2.isSignedIn.get());
+      })
     })
   }
 
@@ -84,9 +91,11 @@ class Login extends Component {
         <button className="back-button">
           <Link exact="true" to="/"><FontAwesomeIcon className="angle-left-icon" icon="angle-left" size="2x" /></Link>
         </button>
-        <div className="g-signin2" data-onsucess={this.onSignIn} />
         <h1 className="app-title"> North Bay Badminton Group </h1>
         <div className="login-container">
+        <div className="gsignin-container">
+          <div className="g-signin2" onClick={() => this.googleLogin()}></div>
+        </div>
           <form className="login-form" onSubmit={(e) => this.handleLogin(e)}>
             <div>
               <label className={['email', 'input-field'].join(' ')}>
