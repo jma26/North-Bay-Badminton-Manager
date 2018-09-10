@@ -101,7 +101,7 @@ class Login extends Component {
         <h1 className="app-title"> North Bay Badminton Group </h1>
         <div className="login-container">
         <div className="gsignin-container">
-          <div className="g-signin2" data-theme="dark" data-longtitle="true" onClick={() => this.googleLogin()}></div>
+          <div className="g-signin2" data-width="235" data-theme="dark" data-longtitle="true" onClick={() => this.googleLogin()}></div>
         </div>
           <form className="login-form" onSubmit={(e) => this.handleLogin(e)}>
             <div>
