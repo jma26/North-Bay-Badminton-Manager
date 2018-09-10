@@ -13,6 +13,7 @@ class Platform extends Component {
     .auth()
     .signOut()
     .then(() => {
+      this.checkGoogleAuthInstance();
       console.log('User logged out successful!')
       // Redirect on successful promise from signOut()
       this.props.history.push({
@@ -21,6 +22,43 @@ class Platform extends Component {
     })
     .catch((error) => {
       console.log(error);
+    })
+  }
+
+  checkGoogleAuthInstance() {
+    // Initialize auth2 to be fulfilled by a GoogleAuth object
+    let auth2 = window.gapi.auth2.getAuthInstance();
+    console.log(auth2.isSignedIn.get());
+    if (auth2.isSignedIn.get()) {
+      auth2.signOut().then(() => {
+        console.log('User logged out of Google!');
+      })
+      // Revoke scope & credentials
+      auth2.disconnect().then(() => {
+        console.log('User disconnected from Google!');
+      })
+    }
+  }
+
+  componentDidMount() {
+    // Load script for google sign-in button to appear
+    (function() {
+      let e = document.createElement('script');
+      e.type= "text/javascript";
+      e.async = true;
+      e.src = "https://apis.google.com/js/platform.js";
+      let t = document.getElementsByTagName("script")[0];
+      t.parentNode.insertBefore(e, t)
+    })();
+
+    window.gapi.load('auth2', () => {
+      window.gapi.auth2.init({
+        client_id: "639843179540-b5t5jbeng5l0hoa97p4bjaj04bsburvr.apps.googleusercontent.com",
+        scope: "profile email"
+      })
+      .then((auth2) => {
+        console.log('Signed in: ', auth2.isSignedIn.get());
+      })
     })
   }
 

@@ -57,7 +57,7 @@ class Register extends Component {
           this.props.history.push({
             pathname: '/platform/home',
             state: {
-              'user': user.displayName,
+              'name': user.displayName,
               'email': user.email
             }
           })
