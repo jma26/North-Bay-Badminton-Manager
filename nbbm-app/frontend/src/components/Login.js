@@ -59,6 +59,13 @@ class Login extends Component {
       let profile = auth2.currentUser.get().getBasicProfile();
       console.log(profile.getName());
       console.log(profile.getEmail());
+      this.props.history.push({
+        pathname: '/platform/home',
+        state: {
+          'name': profile.getName(),
+          'email': profile.getEmail()
+        }
+      })
     })
   }
 
