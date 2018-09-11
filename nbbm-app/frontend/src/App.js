@@ -12,9 +12,9 @@ class App extends Component {
     return (
       <div className="App">
         {/* Login component will always render */}
-        <Route exact path="/" component={ Login } />
+        <Route exact path="/" component={ Register } />
         <Switch>
-          <Route path="/register" component={ Register } />
+          <Route path="/loing" component={ Login } />
           <Route path="/platform" component={ Platform } />
         </Switch>
       </div>
