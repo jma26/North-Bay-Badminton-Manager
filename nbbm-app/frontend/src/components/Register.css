@@ -14,34 +14,48 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active {
   background-color: #222431;
   min-width: 300px;
   min-height: 100vh;
-  text-align: center;
 }
 
-.back-button {
-  border-color: #4EB8CE;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.angle-left-icon {
-  background-color: #222431;
-  color: white;
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 24px;
 }
 
 .app-title {
   color: #4BBACA;
 }
 
-.icon {
-  display: inline;
+.login-link {
+  align-self: center;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.gsignin-container {
+  text-align: center;
+}
+
+.gsignin-container > div {
+  display: inline-block;
+}
+
+.separator {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 16px 0px 4px 0px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.separator_content {
+  color: #FFF;
 }
 
 .register-form {
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 16px;
 }
 
 .input-field {
@@ -72,7 +86,7 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active {
   font-size: 16px;
   margin: 16px 0px;
   outline: 0px;
-  padding: 8px;
+  padding: 0px 8px 8px 8px;
   width: 200px;
 }
 

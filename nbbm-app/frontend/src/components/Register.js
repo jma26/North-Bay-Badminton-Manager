@@ -121,11 +121,17 @@ class Register extends Component {
   render() {
     return (
       <div className="Register">
-        <h1 className="app-title"> North Bay Badminton Group </h1>
+        <header>
+          <h1 className="app-title"> NBBC </h1>
+          <Link className="login-link" to="/login"> Log in </Link>
+        </header>
         <div className="register-container">
-        <div className="gsignin-container">
-          <div className="g-signin2" data-width="235" data-theme="dark" data-longtitle="true" onClick={(e) => this.handleRegistration(e, "google")}></div>
-        </div>
+          <div className="gsignin-container">
+            <div className="g-signin2" data-width="235" data-theme="dark" data-longtitle="true" onClick={(e) => this.handleRegistration(e, "google")}></div>
+          </div>
+          <div className="separator">
+            <span className="separator_content"> or </span>
+          </div>
           <form className="register-form" onSubmit={(e) => this.handleRegistration(e, "manual")}>
             <div>
               <label className={['user', 'input-field'].join(' ')} >
