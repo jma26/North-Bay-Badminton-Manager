@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import './League.css';
 
+import LeagueMembers from './LeagueMembers';
+
 class League extends Component {
   constructor(props) {
     super(props);
@@ -8,12 +10,13 @@ class League extends Component {
       'league': null
     }
   }
-  
+
   render() {
     return (
       <div className="league">
-        <input type="button" className="league-button" value="Join a league!" />
-        <table>
+        <input type="button" className="join-league-btn" value="Join a league!" />
+        <LeagueMembers />
+        <table className="league-rankings">
           <thead>
             <tr>
               <th> League Names </th>

@@ -2,3 +2,9 @@
   border: 1px solid #FFF;
   color: #FFF;
 }
+
+.join-league-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 4px;
+}
