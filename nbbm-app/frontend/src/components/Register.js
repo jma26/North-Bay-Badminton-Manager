@@ -3,7 +3,7 @@ import './Register.css';
 
 import { Link } from 'react-router-dom';
 
-import { fireStore, firebaseApp} from '../config/firebase';
+import { fireStore, firebaseApp, firebaseMain } from '../config/firebase';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
@@ -28,11 +28,13 @@ class Register extends Component {
     })
   }
 
-  handleRegistration(e) {
-    let user = null;
+  handleRegistration(e, type) {
     e.preventDefault();
+    let user = null;
     console.log(this.state);
-    firebaseApp
+    // "Manual" registration
+    if (type === "manual") {
+      firebaseApp
       .auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
         user = firebaseApp.auth().currentUser;
@@ -43,7 +45,8 @@ class Register extends Component {
         this.setState({
           'successful_registration': true
         })
-      }).then(() => {
+      })
+      .then(() => {
         user.updateProfile({
           displayName: this.state.fullName
         })
@@ -70,17 +73,60 @@ class Register extends Component {
           'confirmpassword': ''
         })
       });
+    } else if (type === "google") {
+      let provider = new firebaseMain.auth.GoogleAuthProvider();
+      firebaseApp.auth().signInWithPopup(provider)
+      .then((result) => {
+        let user = result.user;
+        console.log(user);
+        console.log(user.displayName);
+        console.log(user.email);
+        fireStore.collection('users').add({
+          fullName: user.displayName,
+          email: user.email
+        })
+        this.props.history.push({
+          pathname: '/platform/home',
+          state: {
+            'name': user.displayName,
+            'email': user.email
+          }
+        })
+      })
+    }
+  }
+
+  componentDidMount() {
+    // Load script for google sign-in button to appear
+    (function() {
+      let e = document.createElement('script');
+      e.type= "text/javascript";
+      e.async = true;
+      e.src = "https://apis.google.com/js/platform.js";
+      let t = document.getElementsByTagName("script")[0];
+      t.parentNode.insertBefore(e, t)
+    })();
+
+    // Load auth2
+    window.gapi.load('auth2', () => {
+      window.gapi.auth2.init({
+        client_id: "639843179540-b5t5jbeng5l0hoa97p4bjaj04bsburvr.apps.googleusercontent.com",
+      })
+      .then((auth2) => {
+        console.log('Signed in: ', auth2.isSignedIn.get());
+      })
+    })
   }
 
   render() {
     return (
       <div className="Register">
-        <button className="back-button">
-          <Link exact="true" to="/"><FontAwesomeIcon className="angle-left-icon" icon="angle-left" size="2x" /></Link>
-        </button>
         <h1 className="app-title"> North Bay Badminton Group </h1>
         <div className="register-container">
-          <form className="register-form" onSubmit={(e) => this.handleRegistration(e)}>
+        <div className="gsignin-container">
+          <div className="g-signin2" data-width="235" data-theme="dark" data-longtitle="true" onClick={(e) => this.handleRegistration(e, "google")}></div>
+        </div>
+          <form className="register-form" onSubmit={(e) => this.handleRegistration(e, "manual")}>
             <div>
               <label className={['user', 'input-field'].join(' ')} >
                 <input type="text" name="fullName" value={this.state.fullName} placeholder="Enter Full Name" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
