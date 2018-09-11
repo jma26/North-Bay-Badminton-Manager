@@ -95,9 +95,6 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <button className="back-button">
-          <Link exact="true" to="/"><FontAwesomeIcon className="angle-left-icon" icon="angle-left" size="2x" /></Link>
-        </button>
         <h1 className="app-title"> North Bay Badminton Group </h1>
         <div className="login-container">
         <div className="gsignin-container">
