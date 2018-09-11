@@ -95,11 +95,17 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <h1 className="app-title"> North Bay Badminton Group </h1>
+        <header>
+          <h1 className="app-title"> NBBC </h1>
+          <Link className="register-link" to="/"> Sign up </Link>
+        </header>
         <div className="login-container">
-        <div className="gsignin-container">
-          <div className="g-signin2" data-width="235" data-theme="dark" data-longtitle="true" onClick={() => this.googleLogin()}></div>
-        </div>
+          <div className="gsignin-container">
+            <div className="g-signin2" data-width="235" data-theme="dark" data-longtitle="true" onClick={() => this.googleLogin()}></div>
+          </div>
+          <div className="separator">
+            <span className="separator_content"> or </span>
+          </div>
           <form className="login-form" onSubmit={(e) => this.handleLogin(e)}>
             <div>
               <label className={['email', 'input-field'].join(' ')}>
