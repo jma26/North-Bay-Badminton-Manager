@@ -67,10 +67,22 @@ class Platform extends Component {
       <div className="Platform">
         <nav>
           <button className="platformlinks-home platformlinks">
-            <Link to="/platform/home" style={{textDecoration: 'none'}}> Home </Link>
+            <Link to={{
+              pathname: '/platform/home',
+              state: {
+                'name': this.props.location.state.name,
+                'email': this.props.location.state.email
+              }
+            }} style={{textDecoration: 'none'}}> Home </Link>
           </button>
           <button className="platformlinks-chat platformlinks">
-            <Link to="/platform/chat" style={{textDecoration: 'none'}}> Chatroom </Link>
+            <Link to={{
+              pathname: '/platform/chat',
+              state: {
+                'name': this.props.location.state.name,
+                'email': this.props.location.state.email
+              }
+            }} style={{textDecoration: 'none'}}> Chatroom </Link>
           </button>
           <button className="platformlinks-logout platformlink" onClick={() => this.handleLogout()}> Logout </button>
         </nav>
