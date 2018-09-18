@@ -29,9 +29,14 @@ const io = socketIo(server);
 
 io.on('connection', (socket) => {
   console.log(socket.id);
+  // Receive new user login
+  socket.on('new_user', (data) => {
+    console.log(data);
+    io.emit('announce_new_user', `Welcome to the chatroom ${data.message}!`);
+  })
   // Receive message
   socket.on('send_message', (data) => {
     console.log(data);
-    io.emit('receive_message', data);
+    io.emit('send_received_message', data);
   })
 })

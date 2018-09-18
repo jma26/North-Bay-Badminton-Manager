@@ -11,10 +11,16 @@ class SocketChat extends Component {
       'message': '',
       'messages': [],
     }
+
     this.socket = io('localhost:8000');
-    this.socket.on('receive_message', (data) => {
+    this.socket.on('send_received_message', (data) => {
       this.setState({
         'messages': [...this.state.messages, data.message]
+      })
+    })
+    this.socket.on('announce_new_user', (data) => {
+      this.setState({
+        'messages': [...this.state.messages, data]
       })
     })
   }
@@ -27,6 +33,12 @@ class SocketChat extends Component {
    this.setState({
      'message': ''
    })
+  }
+
+  componentDidMount() {
+    this.socket.emit('new_user', {
+      message: this.props.location.state.name
+    })
   }
 
   render() {
