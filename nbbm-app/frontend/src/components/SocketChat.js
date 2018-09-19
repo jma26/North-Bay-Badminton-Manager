@@ -18,9 +18,9 @@ class SocketChat extends Component {
         'messages': [...this.state.messages, data.message]
       })
     })
-    this.socket.on('announce_new_user', (data) => {
+    this.socket.on('chat_history', (data) => {
       this.setState({
-        'messages': [...this.state.messages, data]
+        'messages': [...this.state.messages, data.message]
       })
     })
   }
@@ -28,7 +28,7 @@ class SocketChat extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.socket.emit('send_message', {
-      message: this.state.message
+      message: this.state.message +  ` - ${this.props.location.state.name}`
     })
    this.setState({
      'message': ''
@@ -36,9 +36,8 @@ class SocketChat extends Component {
   }
 
   componentDidMount() {
-    this.socket.emit('new_user', {
-      message: this.props.location.state.name
-    })
+    // Emit to server that new_user appeared!
+    this.socket.emit('new_user', {})
   }
 
   render() {
