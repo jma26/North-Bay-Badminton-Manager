@@ -7,8 +7,8 @@ function ChatMessages(props) {
     <div className="ChatMessages">
       <ol>
     {
-      props.chatHistory.map((message) => 
-        <li className="message"> {message} </li>
+      props.chatHistory.map((message, i) => 
+        <li key={i} className="message"> {message} </li>
       )
     }
       </ol>
