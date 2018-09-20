@@ -1,7 +1,6 @@
 .SocketChat {
   background-color: #222431;
   min-width: 300px;
-  min-height: 100vh;
 }
 
 .SocketChat-headline {
@@ -15,21 +14,23 @@
   min-width: 500px;
   max-width: 975px;
   margin: 0 auto;
+  display: flex;
+}
+
+.active-users {
+  width: 30%;
 }
 
 .chatbox-container {
   border-left: 2px solid #FFFFFF;
-  float: right;
-  height: 100%;
   overflow-y: hidden;
-  width: 75%;
 }
 
 .formChat {
-  display: flex;
   border-top: 2px solid #FFFFFF;
+  display: flex;
   justify-content: center;
-  padding: 8px;
+  padding: 4px;
 }
 
 .send-button {
@@ -38,7 +39,7 @@
   color: #FFFFFF;
   font-size: 16px;
   padding: 8px;
-  width: 100px;
+  width: 10%;
 }
 
 .send-button:hover {
@@ -54,6 +55,6 @@
   border: none;
   font-size: 16px;
   padding: 8px;
-  width: 600px;
+  width: 90%;
   margin-right: 8px;
 }

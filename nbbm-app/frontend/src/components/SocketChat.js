@@ -3,6 +3,7 @@ import './SocketChat.css';
 import io from 'socket.io-client';
 
 import ChatMessages from './ChatMessages.js';
+import ChatUsers from './ChatUsers.js';
 
 class SocketChat extends Component {
   constructor(props) {
@@ -10,17 +11,26 @@ class SocketChat extends Component {
     this.state = {
       'message': '',
       'messages': [],
+      'activeUsers': []
     }
 
     this.socket = io('localhost:8000');
+    // Add sent messages to chat history
     this.socket.on('send_received_message', (data) => {
       this.setState({
         'messages': [...this.state.messages, data.message]
       })
     })
+    // Update user with whole chat history
     this.socket.on('chat_history', (data) => {
       this.setState({
         'messages': [...this.state.messages, data.message]
+      })
+    })
+    // Update activeUsers array
+    this.socket.on('active_users', (data) => {
+      this.setState({
+        'activeUsers': [...this.state.activeUsers, data.user]
       })
     })
   }
@@ -37,7 +47,9 @@ class SocketChat extends Component {
 
   componentDidMount() {
     // Emit to server that new_user appeared!
-    this.socket.emit('new_user', {})
+    this.socket.emit('new_user', {
+      user: this.props.location.state.name
+    })
   }
 
   render() {
@@ -45,6 +57,9 @@ class SocketChat extends Component {
       <div className="SocketChat">
         <h2 className="SocketChat-headline"> Community Chat </h2>
         <div className="chat-box">
+          <div className="active-users">
+            <ChatUsers activeUsers={this.state.activeUsers} />
+          </div>
           <div className="chatbox-container">
             <ChatMessages chatHistory={this.state.messages} />
               <form className="formChat" onSubmit={(e) => this.handleSubmit(e)} >
