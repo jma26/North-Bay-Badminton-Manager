@@ -28,24 +28,22 @@ connection.connect((err) => {
 const io = socketIo(server);
 
 io.on('connection', (socket) => {
-  console.log(socket.id);
-  // Receive notification of a new user appearing!
-  socket.on('new_user', () => {
+  console.log('Hello', socket.id);
+    /* ******************************** */
+    // Need to save activeUsers to database or as an array in server (cheap way)
+    /* ******************************** */
     // Send socket chat history to user that signed in
     connection.query("SELECT `Message_content` FROM `messages`", (err, db_data) => {
-      console.log(db_data);
       console.log(err);
       for (let x in db_data) {
         socket.emit('chat_history', {message: db_data[x].Message_content})
       }
     });
-  })
   // Receive message
   socket.on('send_message', (data) => {
     console.log(data);
     // Save socket chat message into mysql db
     connection.query("INSERT INTO `messages` (`Message_content`) VALUES ('" + data.message + "')", (err, db_data) => {
-      console.log(db_data);
       console.log(err);
     });
     io.emit('send_received_message', data);
