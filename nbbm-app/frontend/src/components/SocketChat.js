@@ -27,12 +27,6 @@ class SocketChat extends Component {
         'messages': [...this.state.messages, data.message]
       })
     })
-    // Update activeUsers array
-    this.socket.on('active_users', (data) => {
-      this.setState({
-        'activeUsers': [...this.state.activeUsers, data.user]
-      })
-    })
   }
 
   handleSubmit(e) {
@@ -49,6 +43,13 @@ class SocketChat extends Component {
     // Emit to server that new_user appeared!
     this.socket.emit('new_user', {
       user: this.props.location.state.name
+    })
+    // Update activeUsers array
+    this.socket.on('active_users', (data) => {
+      console.log(data.users);
+      this.setState({
+        'activeUsers': [...data.users]
+      })
     })
   }
 
