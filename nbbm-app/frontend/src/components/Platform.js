@@ -6,6 +6,7 @@ import { firebaseApp } from '../config/firebase';
 
 import SocketChat from './SocketChat';
 import PlatformHome from './PlatformHome';
+import JoinLeague from './JoinLeague';
 
 class Platform extends Component {
   handleLogout() {
@@ -84,11 +85,21 @@ class Platform extends Component {
               }
             }} style={{textDecoration: 'none'}}> Chatroom </Link>
           </button>
+          <button className="platformlinks-league platformlinks">
+            <Link to={{
+              pathname: '/platform/joinleague',
+              state: {
+                'name': this.props.location.state.name,
+                'email': this.props.location.state.email
+              }
+            }} style={{textDecoration: 'none'}}> Join a League! </Link>
+          </button>
           <button className="platformlinks-logout platformlink" onClick={() => this.handleLogout()}> Logout </button>
         </nav>
         <Route path="/platform/home" component={ PlatformHome } />
         <Switch>
           <Route path="/platform/chat" component={ SocketChat } />
+          <Route path="/platform/joinleague" component={ JoinLeague } />
         </Switch>
       </div>
     )

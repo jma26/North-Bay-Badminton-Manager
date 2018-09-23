@@ -1,4 +1,5 @@
 import React, { Component} from 'react';
+import { Link } from 'react-router-dom';
 import './League.css';
 
 import LeagueMembers from './LeagueMembers';
@@ -14,7 +15,6 @@ class League extends Component {
   render() {
     return (
       <div className="league">
-        <input type="button" className="join-league-btn" value="Join a league!" />
         <LeagueMembers />
         <table className="league-rankings">
           <thead>
