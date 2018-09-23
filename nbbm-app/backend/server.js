@@ -36,7 +36,6 @@ io.on('connection', (socket) => {
     socket.on('new_user', (data) => {
       // Add new user to array
       activeUsers.push(data.user);
-      console.log(activeUsers);
       // Send current active users in chatroom to all
       io.emit("active_users", {'users': activeUsers});
       // Send socket chat history to user that signed in
@@ -57,4 +56,15 @@ io.on('connection', (socket) => {
     io.emit('send_received_message', data);
   })
   // Disconnect from socket when user navigates away
+  socket.on('disconnect_user', (data) => {
+    console.log('Disconnecting data', data);
+    socket.removeAllListeners();
+    // Find index of the user
+    let index = activeUsers.indexOf(data.user);
+    console.log("User's index is", index);
+    // Pop the user out of the array
+    activeUsers.pop(index);
+    // Update all users with array
+    io.emit("active_users", {'users': activeUsers})
+  })
 })
