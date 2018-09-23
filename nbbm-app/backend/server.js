@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
     let index = activeUsers.indexOf(data.user);
     console.log("User's index is", index);
     // Pop the user out of the array
-    activeUsers.pop(index);
+    activeUsers.splice(index, 1);
     // Update all users with array
     io.emit("active_users", {'users': activeUsers})
   })
