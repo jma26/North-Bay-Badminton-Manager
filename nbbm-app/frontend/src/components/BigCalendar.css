@@ -62,6 +62,7 @@ button.rbc-input::-moz-focus-inner {
   background: #246E90;
 }
 .rbc-header {
+  color: #FFF;
   overflow: hidden;
   -webkit-flex: 1 0 0%;
       -ms-flex: 1 0 0%;
