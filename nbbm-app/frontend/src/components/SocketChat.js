@@ -53,6 +53,14 @@ class SocketChat extends Component {
     })
   }
 
+  componentWillUnmount() {
+    // Disconnect user when navigating away
+    console.log('Disconnecting user....');
+    this.socket.emit('disconnect_user', {
+      'user': this.props.location.state.name
+    })
+  }
+
   render() {
     return (
       <div className="SocketChat">
