@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoginErrors } from './validations/LoginErrors';
+import { ValidationErrors } from './validations/ValidationErrors';
 import './Login.css';
 
 import { Link } from 'react-router-dom';
@@ -47,22 +47,10 @@ class Login extends Component {
     }).catch((error) => {
       console.log(error);
       // Login errors
-      if (error.code === "auth/wrong-password") {
+      if (error.code) {
         this.setState({
           'error_message': error.message,
           'error_type': error.code
-        })
-        
-      } else if (error.code === "auth/user-not-found") {
-        this.setState({
-          'error_message': error.message,
-          'error_type': error.code,
-          'email': ''
-        })
-      } else if (error.code === "auth/invalid-email") {
-        this.setState({
-          'error_message': error.message,
-        'error_type': error.code
         })
       }
       // Reset password if error
@@ -116,13 +104,13 @@ class Login extends Component {
   }
 
   render() {
+    // Initialize error variables
+    var error_wrong_password,error_emails;
     // If expression to show login errors
-    var error_wrong_password;
-    var error_emails;
-    if (this.state.error_message && this.state.error_type == 'auth/wrong-password') {
-      error_wrong_password = <LoginErrors type={this.state.error_type} message={this.state.error_message} />
+    if (this.state.error_type == 'auth/wrong-password') {
+      error_wrong_password = <ValidationErrors type={this.state.error_type} message={this.state.error_message} />
     } else if (this.state.error_message) {
-      error_emails = <LoginErrors type={this.state.error_type} message={this.state.error_message} />
+      error_emails = <ValidationErrors type={this.state.error_type} message={this.state.error_message} />
     }
 
     return (

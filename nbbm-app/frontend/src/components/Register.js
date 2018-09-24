@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ValidationErrors } from './validations/ValidationErrors';
 import './Register.css';
 
 import { Link } from 'react-router-dom';
@@ -18,6 +19,8 @@ class Register extends Component {
       'email': '',
       'password': '',
       'confirmpassword': '',
+      'error_message': '',
+      'error_type': '',
       'successful_registration': false
     }
   }
@@ -34,6 +37,25 @@ class Register extends Component {
     console.log(this.state);
     // "Manual" registration
     if (type === "manual") {
+      // Check if password matches confirm password
+      if (this.state.password !== this.state.confirmpassword) {
+        this.setState({
+          'password': '',
+          'confirmpassword': '',
+          'error_type': "auth/passwords-not-matching",
+          'error_message': "Passwords do not match"
+        })
+        return null;
+      }
+      // Check if input field for user is filled out
+      if (this.state.fullName == '') {
+        this.setState({
+          'error_type': "auth/no-name",
+          'error_message': 'Full name is empty'
+        })
+        return null;
+      }
+      // Create new firebase user
       firebaseApp
       .auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
@@ -68,6 +90,14 @@ class Register extends Component {
       })
       .catch((error) => {
         console.log(error);
+        // Registration Errors
+        if (error.code) {
+          this.setState({
+            'error_message': error.message,
+            'error_type': error.code
+          })
+        }
+        // Always reset password if error
         this.setState({
           'password': '',
           'confirmpassword': ''
@@ -119,6 +149,23 @@ class Register extends Component {
   }
 
   render() {
+    // Initialize error variables
+    var error_wrong_password, error_emails, error_weak_password, error_passwords_not_matching, error_no_name, error_email_in_use;
+    // If expression to show registration errors
+    if (this.state.error_type === 'auth/wrong-password') {
+      error_wrong_password = <ValidationErrors type={this.state.error_type} message={this.state.error_message} />
+    } else if (this.state.error_type === 'auth/weak-password') {
+      error_weak_password = <ValidationErrors type={this.state.error_type} message={this.state.error_message} />
+    } else if (this.state.error_type === 'auth/passwords-not-matching') {
+      error_passwords_not_matching = <ValidationErrors type={this.state.error_type} message={this.state.error_message} />
+    } else if (this.state.error_type === 'auth/invalid-email') {
+      error_emails = <ValidationErrors type={this.state.error_type} message={this.state.error_message} />
+    } else if (this.state.error_type === 'auth/no-name') {
+      error_no_name = <ValidationErrors type={this.state.error_type} message={this.state.error_message} />
+    } else if (this.state.error_type === 'auth/email-already-in-use') {
+      error_email_in_use = <ValidationErrors type={this.state.error_type} message={this.state.error_message} />
+    }
+
     return (
       <div className="Register">
         <header>
@@ -137,17 +184,23 @@ class Register extends Component {
               <label className={['user', 'input-field'].join(' ')} >
                 <input type="text" name="fullName" value={this.state.fullName} placeholder="Enter Full Name" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
+              {error_no_name}
             </div>
             <div>
               <label className={['email', 'input-field'].join(' ')}>
                 <input type="text" name="email" value={this.state.email} placeholder="Email Address" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
+              {error_emails}
+              {error_email_in_use}
             </div>
             <div>
               <label className={['password', 'input-field'].join(' ')}>
                 <FontAwesomeIcon className="password" icon="lock" />
                 <input type="password" name="password" value={this.state.password} onChange={(e) => this.handleChange(e)} placeholder="Password" className="input-password" />
               </label>
+              {error_passwords_not_matching}
+              {error_wrong_password} 
+              {error_weak_password}
             </div>
             <div>
               <label className={['password', 'input-field'].join(' ')}>
