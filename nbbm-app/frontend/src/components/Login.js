@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { LoginErrors } from './validations/LoginErrors';
 import './Login.css';
 
 import { Link } from 'react-router-dom';
@@ -11,7 +12,9 @@ class Login extends Component {
     super(props);
     this.state = {
       'email': '',
-      'password': ''
+      'password': '',
+      'error_message': '',
+      'error_type': ''
     }
   }
 
@@ -43,6 +46,26 @@ class Login extends Component {
       })
     }).catch((error) => {
       console.log(error);
+      // Login errors
+      if (error.code === "auth/wrong-password") {
+        this.setState({
+          'error_message': error.message,
+          'error_type': error.code
+        })
+        
+      } else if (error.code === "auth/user-not-found") {
+        this.setState({
+          'error_message': error.message,
+          'error_type': error.code,
+          'email': ''
+        })
+      } else if (error.code === "auth/invalid-email") {
+        this.setState({
+          'error_message': error.message,
+        'error_type': error.code
+        })
+      }
+      // Reset password if error
       this.setState({
         'password': ''
       })
@@ -93,6 +116,15 @@ class Login extends Component {
   }
 
   render() {
+    // If expression to show login errors
+    var error_wrong_password;
+    var error_emails;
+    if (this.state.error_message && this.state.error_type == 'auth/wrong-password') {
+      error_wrong_password = <LoginErrors type={this.state.error_type} message={this.state.error_message} />
+    } else if (this.state.error_message) {
+      error_emails = <LoginErrors type={this.state.error_type} message={this.state.error_message} />
+    }
+
     return (
       <div className="Login">
         <header>
@@ -111,12 +143,14 @@ class Login extends Component {
               <label className={['email', 'input-field'].join(' ')}>
                 <input type="text" name="email" value={this.state.email} placeholder="Email Address" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
+              {error_emails}
             </div>
             <div>
               <label className={['password', 'input-field'].join(' ')}>
                 <FontAwesomeIcon className="password" icon="lock" />
-                <input type="password" name="password" value={this.state.password} placeholder="Password" onChange={(e) => this.handleChange(e)} className="input-password" />
+                <input type="password" name="password" value={this.state.password} placeholder="Password" onChange={(e) => this.handleChange(e)} className="input-password" /> 
               </label>
+              {error_wrong_password}
             </div>
             <input type="submit" value="Sign in" className="login-button"/>
           </form>
