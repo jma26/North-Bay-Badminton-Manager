@@ -1,7 +1,7 @@
 import React from 'react';
-import './LoginErrors.css';
+import './ValidationErrors.css';
 
-export function LoginErrors(props) {
+export function ValidationErrors(props) {
   return (
     <div className="LoginErrors">
       <span> {props.message} </span>
