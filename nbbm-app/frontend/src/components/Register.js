@@ -104,22 +104,20 @@ class Register extends Component {
         })
       });
     } else if (type === "google") {
-      let provider = new firebaseMain.auth.GoogleAuthProvider();
-      firebaseApp.auth().signInWithPopup(provider)
-      .then((result) => {
-        let user = result.user;
-        console.log(user);
-        console.log(user.displayName);
-        console.log(user.email);
-        fireStore.collection('users').add({
-          fullName: user.displayName,
-          email: user.email
-        })
+      console.log('Google registration detected!');
+      // Initialize auth2 to be fulfilled by a GoogleAuth object
+      let auth2 = window.gapi.auth2.getAuthInstance();
+      // Sign the user in
+      auth2.signIn().then(() => {
+        // Use currentUser to return a GoogleUser object and call getBasicProfile() with it
+        let profile = auth2.currentUser.get().getBasicProfile();
+        console.log(profile.getName());
+        console.log(profile.getEmail());
         this.props.history.push({
           pathname: '/platform/home',
           state: {
-            'name': user.displayName,
-            'email': user.email
+            'name': profile.getName(),
+            'email': profile.getEmail()
           }
         })
       })
