@@ -36,6 +36,7 @@ io.on('connection', (socket) => {
     socket.on('new_user', (data) => {
       // Add new user to array
       activeUsers.push(data.user);
+      console.log(activeUsers);
       // Send current active users in chatroom to all
       io.emit("active_users", {'users': activeUsers});
       // Send socket chat history to user that signed in
@@ -58,7 +59,6 @@ io.on('connection', (socket) => {
   // Disconnect from socket when user navigates away
   socket.on('disconnect_user', (data) => {
     console.log('Disconnecting data', data);
-    socket.removeAllListeners();
     // Find index of the user
     let index = activeUsers.indexOf(data.user);
     console.log("User's index is", index);
@@ -66,5 +66,21 @@ io.on('connection', (socket) => {
     activeUsers.splice(index, 1);
     // Update all users with array
     io.emit("active_users", {'users': activeUsers})
+    socket.removeAllListeners();
+  })
+})
+
+// Allow CORS
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
+
+// Retrieve all available Leagues
+app.get('/getAllLeagues', (req, res) => {
+  connection.query('SELECT * FROM `LEAGUE`', (err, data) => {
+    console.log(data);
+    res.json(data);
   })
 })
