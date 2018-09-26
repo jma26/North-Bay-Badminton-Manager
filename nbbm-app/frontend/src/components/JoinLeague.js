@@ -7,7 +7,8 @@ class JoinLeague extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      'leagues': []
+      'leagues': [],
+      'league_name': ''
     }
   }
 
@@ -26,6 +27,12 @@ class JoinLeague extends Component {
     })
   }
 
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
   render() {
     var no_leagues;
     // Check if any leagues exist
@@ -35,6 +42,11 @@ class JoinLeague extends Component {
     return (
       <div className="JoinLeague">
         <p> {no_leagues} </p>
+        <form onSubmit={(e) => this.handleLeagueRegistratio(e)}>
+          <label> Create a new league below! </label>
+          <input type="text" name="league_name" value={this.state.league_name} placeholder="League name" onChange={(e) => this.handleChange(e)} />
+          <input type="submit" value="Submit" />
+        </form>
       </div>
     )
   }
