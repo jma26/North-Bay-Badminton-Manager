@@ -84,3 +84,8 @@ app.get('/getAllLeagues', (req, res) => {
     res.json(data);
   })
 })
+
+// Create new league
+app.get('/createLeague', (req, res) => {
+  console.log(req);
+})
