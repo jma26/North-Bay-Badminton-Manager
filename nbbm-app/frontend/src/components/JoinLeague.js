@@ -16,11 +16,11 @@ class JoinLeague extends Component {
     axios.get('http://localhost:8000/getAllLeagues')
     .then((res) => {
       console.log(res);
-    })
-    .then((leagues) => {
-      this.setState({
-        'leagues': [...leagues]
-      })
+      if (res.data.length > 0) {
+        this.setState({
+          'leagues': [...res.data]
+        })
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -30,6 +30,17 @@ class JoinLeague extends Component {
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
+    })
+  }
+
+  handleLeagueRegistration(e) {
+    e.preventDefault();
+    let league = {
+      'league': this.state.league_name
+    }
+    axios.post('https://localhost:8000/createLeague', {league})
+    .then((res) => {
+      console.log(res);
     })
   }
 
