@@ -10,7 +10,6 @@ class JoinLeague extends Component {
       'leagues': [],
       'league_name': ''
     }
-    this.renderTable = this.renderTable.bind(this);
   }
 
   componentDidMount() {
@@ -27,13 +26,13 @@ class JoinLeague extends Component {
       console.log(err);
     })
   }
-
+  
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
-
+  
   handleLeagueRegistration(e) {
     e.preventDefault();
     let league = {
@@ -44,22 +43,7 @@ class JoinLeague extends Component {
       console.log(res);
     })
   }
-
-  renderTable() {
-    if (this.state.leagues > 1) {
-      console.log('Detecting more than 1 league names...');
-    }
-    if (this.state.leagues > 1) {
-      this.state.leagues.map((league) => {
-        return (
-          <tr key={league.id}>
-            <td>{league.Club_Name}</td>
-          </tr>
-        );
-      });
-    }
-  }
-
+  
   render() {
     return (
       <div className="JoinLeague">
@@ -75,7 +59,14 @@ class JoinLeague extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.renderTable()}
+            {this.state.leagues.map((league) => {
+              console.log(league);
+              return (
+              <tr key={league.id}>
+                <td>{league.Club_Name}</td>
+              </tr>
+              )
+            })}
           </tbody>
         </table>
         {this.state.leagues.length < 1 && 
