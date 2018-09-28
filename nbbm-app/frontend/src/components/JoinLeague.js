@@ -10,6 +10,7 @@ class JoinLeague extends Component {
       'leagues': [],
       'league_name': ''
     }
+    this.renderTable = this.renderTable.bind(this);
   }
 
   componentDidMount() {
@@ -44,20 +45,42 @@ class JoinLeague extends Component {
     })
   }
 
-  render() {
-    var no_leagues;
-    // Check if any leagues exist
-    if (this.state.leagues.length < 1) {
-      no_leagues = <p> No available leagues </p>
+  renderTable() {
+    if (this.state.leagues > 1) {
+      console.log('Detecting more than 1 league names...');
     }
+    if (this.state.leagues > 1) {
+      this.state.leagues.map((league) => {
+        return (
+          <tr key={league.id}>
+            <td>{league.Club_Name}</td>
+          </tr>
+        );
+      });
+    }
+  }
+
+  render() {
     return (
       <div className="JoinLeague">
-        <p> {no_leagues} </p>
         <form onSubmit={(e) => this.handleLeagueRegistratio(e)}>
           <label> Create a new league below! </label>
           <input type="text" name="league_name" value={this.state.league_name} placeholder="League name" onChange={(e) => this.handleChange(e)} />
           <input type="submit" value="Submit" />
         </form>
+        <table>
+          <thead>
+            <tr>
+              <th> League Names </th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderTable()}
+          </tbody>
+        </table>
+        {this.state.leagues.length < 1 && 
+          <p> No available leagues </p>
+        }
       </div>
     )
   }
