@@ -60,6 +60,7 @@ class Register extends Component {
       .auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
         user = firebaseApp.auth().currentUser;
+        // Add user to Firestore
         fireStore.collection('users').add({
           fullName: this.state.fullName,
           email: this.state.email,
@@ -105,19 +106,24 @@ class Register extends Component {
       });
     } else if (type === "google") {
       console.log('Google registration detected!');
-      // Initialize auth2 to be fulfilled by a GoogleAuth object
-      let auth2 = window.gapi.auth2.getAuthInstance();
-      // Sign the user in
-      auth2.signIn().then(() => {
-        // Use currentUser to return a GoogleUser object and call getBasicProfile() with it
-        let profile = auth2.currentUser.get().getBasicProfile();
-        console.log(profile.getName());
-        console.log(profile.getEmail());
+      let provider = new firebaseMain.auth.GoogleAuthProvider();
+      firebaseApp.auth().signInWithPopup(provider)
+      .then((result) => {
+        let user = result.user;
+        // Check if user is new user
+        let isNewUser = result.additionalUserInfo.isNewUser
+        if (isNewUser) {
+          // Add new user to Firestore
+          fireStore.collection('users').add({
+            fullName: user.displayName,
+            email: user.email
+          })
+        }
         this.props.history.push({
           pathname: '/platform/home',
           state: {
-            'name': profile.getName(),
-            'email': profile.getEmail()
+            'name': user.displayName,
+            'email': user.email
           }
         })
       })
