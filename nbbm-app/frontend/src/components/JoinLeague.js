@@ -9,7 +9,9 @@ class JoinLeague extends Component {
     super(props);
     this.state = {
       'leagues': [],
-      'league_name': ''
+      'league_name': '',
+      'my_league': '',
+      'my_teammates': []
     }
     this.renderUsersTeam = this.renderUsersTeam.bind(this);
   }
@@ -25,6 +27,38 @@ class JoinLeague extends Component {
     })
     .catch((error) => {
       console.log("Error retrieving collection: ", error);
+    })
+    this.renderUsersTeam();
+  }
+
+  renderUsersTeam() {
+    fireStore.collection('users').doc(this.props.location.state.name).get()
+    .then((doc) => {
+      let userInfo = doc.data();
+      // Assign user's league to state
+      this.setState({
+        'my_league': userInfo.league
+      })
+      console.log(userInfo.league);
+      // Retrieve user's league info
+      fireStore.collection('leagues').doc(userInfo.league).get()
+      .then((doc) => {
+        if (doc.exists) {
+          let league = doc.data().users
+          // Assign user's league teammates to state
+          this.setState({
+            'my_teammates': [league]
+          })
+        } else {
+          console.log("Document does not exist!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error retrieving specific league document: ", error);
+      })
+    })
+    .catch((error) => {
+      console.log("Error retrieving document: ", error);
     })
   }
   
@@ -83,18 +117,24 @@ class JoinLeague extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.renderUsersTeam()}
+            <tr>
+              <td>{this.state.my_league}</td>
+              {this.state.my_teammates.map((teammate, index) => {
+                return (
+                  <td key={index}>{teammate}</td>
+                )
+              })}
+            </tr>
           </tbody>
         </table>
         <table>
           <thead>
             <tr>
-              <th> League Names </th>
+              <th> Available Leagues </th>
             </tr>
           </thead>
           <tbody>
             {this.state.leagues.map((league, index) => {
-              console.log(league);
               return (
               <tr key={index}>
                 <td>{league}</td>
