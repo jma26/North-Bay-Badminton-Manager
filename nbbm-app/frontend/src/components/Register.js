@@ -64,6 +64,7 @@ class Register extends Component {
         fireStore.collection('users').add({
           fullName: this.state.fullName,
           email: this.state.email,
+          'league': null
         })
         this.setState({
           'successful_registration': true
@@ -113,10 +114,12 @@ class Register extends Component {
         // Check if user is new user
         let isNewUser = result.additionalUserInfo.isNewUser
         if (isNewUser) {
+          console.log('Adding new user to fireStore....');
           // Add new user to Firestore
           fireStore.collection('users').add({
             fullName: user.displayName,
-            email: user.email
+            email: user.email,
+            'league': null
           })
         }
         this.props.history.push({
