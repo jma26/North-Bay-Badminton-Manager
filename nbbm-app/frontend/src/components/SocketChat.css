@@ -23,6 +23,7 @@
 
 .chatbox-container {
   border-left: 2px solid #FFFFFF;
+  width: 100%;
   overflow-y: hidden;
 }
 
