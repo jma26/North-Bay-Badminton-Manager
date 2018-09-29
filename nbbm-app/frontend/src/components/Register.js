@@ -60,8 +60,8 @@ class Register extends Component {
       .auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
         user = firebaseApp.auth().currentUser;
-        // Add user to Firestore
-        fireStore.collection('users').add({
+        // Add new user to Firestore
+        fireStore.collection('users').doc(this.state.fullName).set({
           fullName: this.state.fullName,
           email: this.state.email,
           'league': null
@@ -116,7 +116,7 @@ class Register extends Component {
         if (isNewUser) {
           console.log('Adding new user to fireStore....');
           // Add new user to Firestore
-          fireStore.collection('users').add({
+          fireStore.collection('users').doc(user.displayName).set({
             fullName: user.displayName,
             email: user.email,
             'league': null
