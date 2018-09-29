@@ -17,6 +17,11 @@ class JoinLeague extends Component {
   }
 
   componentDidMount() {
+    this.getAllLeagues();
+    this.renderUsersTeam();
+  }
+
+  getAllLeagues() {
     fireStore.collection('leagues').get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -28,7 +33,6 @@ class JoinLeague extends Component {
     .catch((error) => {
       console.log("Error retrieving collection: ", error);
     })
-    this.renderUsersTeam();
   }
 
   renderUsersTeam() {
@@ -44,10 +48,10 @@ class JoinLeague extends Component {
       fireStore.collection('leagues').doc(userInfo.league).get()
       .then((doc) => {
         if (doc.exists) {
-          let league = doc.data().users
+          let roster = doc.data().roster
           // Assign user's league teammates to state
           this.setState({
-            'my_teammates': [league]
+            'my_teammates': [...roster]
           })
         } else {
           console.log("Document does not exist!");
@@ -73,7 +77,7 @@ class JoinLeague extends Component {
     let league = this.state.league_name
     // Save league name to fireStore
     fireStore.collection('leagues').doc(league).set({
-      'users': this.props.location.state.name
+      'roster': [this.props.location.state.name]
     })
     .then(() => {
       console.log("Document successfully written");
@@ -91,6 +95,8 @@ class JoinLeague extends Component {
         this.setState({
           league_name: ''
         })
+        // Re-render league info, call renderUsersTeam
+        this.renderUsersTeam();
       })
       .catch((error) => {
         console.log("Error updating document: ", error);
@@ -98,6 +104,48 @@ class JoinLeague extends Component {
     })
     .catch((error) => {
       console.log("Error writing document: ", error);
+    })
+  }
+  
+  joinleague(league) {
+    fireStore.collection("leagues").doc(league).get()
+    .then((doc) => {
+      // League roster from new team
+      var roster = doc.data().roster;
+      // Add user to new league roster
+      roster.push(this.props.location.state.name);
+      // Update new league roster in firestore
+      fireStore.collection("leagues").doc(league).update({
+        roster: roster
+      })
+    })
+    console.log(this.state.my_teammates);
+    // Retrieve index from old league roster
+    let index = this.state.my_teammates.indexOf(this.props.location.state.name);
+    // Remove user from old league roster
+    let my_old_teammates = this.state.my_teammates;
+    my_old_teammates.splice(index, 1);
+    console.log(index, my_old_teammates);
+    // Delete user from old league roster in firestore
+    fireStore.collection("leagues").doc(this.state.my_league).update({
+      roster: my_old_teammates
+    })
+    // Update user's league affiliation
+    fireStore.collection("users").doc(this.props.location.state.name).update({
+      league: league
+    })
+    .then(() => {
+      console.log("Document successfully updated");
+      // Update user's league affiliation to state
+      this.setState({
+        my_league: league
+      })
+      // Re-render league info, call renderUsersTeam and getAllLeagues
+      this.renderUsersTeam();
+      this.getAllLeagues();
+    })
+    .catch((error) => {
+      console.log("Error updating document: ", error);
     })
   }
   
