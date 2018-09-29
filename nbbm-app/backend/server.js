@@ -76,16 +76,3 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
-
-// Retrieve all available Leagues
-app.get('/getAllLeagues', (req, res) => {
-  connection.query('SELECT * FROM `LEAGUE`', (err, data) => {
-    console.log(data);
-    res.json(data);
-  })
-})
-
-// Create new league
-app.get('/createLeague', (req, res) => {
-  console.log(req);
-})
