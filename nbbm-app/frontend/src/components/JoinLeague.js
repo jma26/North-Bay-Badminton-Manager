@@ -53,7 +53,7 @@ class JoinLeague extends Component {
           let roster = doc.data().roster
           // Assign user's league teammates to state
           this.setState({
-            'my_teammates': [roster]
+            'my_teammates': [...roster]
           })
         } else {
           console.log("Document does not exist!");
@@ -153,6 +153,11 @@ class JoinLeague extends Component {
   }
   
   render() {
+    var no_teammates;
+    if (!this.state.my_league && this.state.my_teammates) {
+      no_teammates = <tr><td> None </td></tr>
+    }
+
     return (
       <div className="JoinLeague">
         <form onSubmit={(e) => this.handleLeagueRegistration(e)}>
@@ -160,7 +165,7 @@ class JoinLeague extends Component {
           <input type="text" name="league_name" value={this.state.league_name} placeholder="League name" onChange={(e) => this.handleChange(e)} />
           <input type="submit" value="Submit" />
         </form>
-        <table>
+        <table className="league-info">
           <thead>
             <tr>
               <th> Your League </th>
@@ -169,16 +174,25 @@ class JoinLeague extends Component {
           </thead>
           <tbody>
             <tr>
-              <td>{this.state.my_league}</td>
-              {this.state.my_teammates.map((teammate, index) => {
-                return (
-                  <td key={index}>{teammate}</td>
-                )
-              })}
+              {
+                !this.state.my_league ? <td> Not in a league </td> : <td> {this.state.my_league} </td>
+              }
+              <td>
+                <table>
+                  {this.state.my_teammates.map((teammate, index) => {
+                    return (
+                        <tr key={index}>
+                          <td>{teammate}</td>
+                        </tr>
+                    )
+                  })}
+                  {no_teammates}
+                </table>
+              </td>
             </tr>
           </tbody>
         </table>
-        <table>
+        <table className="available-leagues">
           <thead>
             <tr>
               <th> Available Leagues </th>

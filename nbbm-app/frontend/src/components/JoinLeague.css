@@ -9,3 +9,11 @@
 .JoinLeague form {
   color: #FFF;
 }
+
+.JoinLeague td {
+  vertical-align: text-top;
+}
+
+.JoinLeague th {
+  text-align: left;
+}
