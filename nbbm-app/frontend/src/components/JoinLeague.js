@@ -46,22 +46,27 @@ class JoinLeague extends Component {
         'my_league': userInfo.league
       })
       console.log(userInfo.league);
-      // Retrieve user's league info
-      fireStore.collection('leagues').doc(userInfo.league).get()
-      .then((doc) => {
-        if (doc.exists) {
-          let roster = doc.data().roster
-          // Assign user's league teammates to state
-          this.setState({
-            'my_teammates': [...roster]
-          })
-        } else {
-          console.log("Document does not exist!");
-        }
-      })
-      .catch((error) => {
-        console.log("Error retrieving specific league document: ", error);
-      })
+      if (!userInfo.league) {
+        console.log('User not in a league yet');
+      } else {
+        console.log('Retrieving user\'s league affiliation');
+        // Retrieve user's league info
+        fireStore.collection('leagues').doc(userInfo.league).get()
+        .then((doc) => {
+          if (doc.exists) {
+            let roster = doc.data().roster
+            // Assign user's league teammates to state
+            this.setState({
+              'my_teammates': [...roster]
+            })
+          } else {
+            console.log("Document does not exist!");
+          }
+        })
+        .catch((error) => {
+          console.log("Error retrieving specific league document: ", error);
+        })
+      }
     })
     .catch((error) => {
       console.log("Error retrieving document: ", error);
@@ -110,6 +115,55 @@ class JoinLeague extends Component {
   }
   
   joinleague(league) {
+    if (!this.state.my_league || !this.state.my_teammates) {
+      // Update user's league affiliation
+      fireStore.collection("users").doc(this.props.location.state.name).update({
+        league: league
+      })
+      .then(() => {
+        console.log("Document successfully updated");
+        // Update user's league affiliation to state
+        this.setState({
+          my_league: league
+        })
+        // Re-render league info, call renderUsersTeam and getAllLeagues
+        this.renderUsersTeam();
+        this.getAllLeagues();
+      })
+      .catch((error) => {
+        console.log("Error updating document: ", error);
+      })
+    } else {
+      console.log(this.state.my_teammates);
+      // Retrieve index from old league roster
+      let index = this.state.my_teammates.indexOf(this.props.location.state.name);
+      // Remove user from old league roster
+      let my_old_teammates = this.state.my_teammates;
+      my_old_teammates.splice(index, 1);
+      console.log(index, my_old_teammates);
+      // Delete user from old league roster in firestore
+      fireStore.collection("leagues").doc(this.state.my_league).update({
+        roster: my_old_teammates
+      })
+      // Update user's league affiliation
+      fireStore.collection("users").doc(this.props.location.state.name).update({
+        league: league
+      })
+      .then(() => {
+        console.log("Document successfully updated");
+        // Update user's league affiliation to state
+        this.setState({
+          my_league: league
+        })
+        // Re-render league info, call renderUsersTeam and getAllLeagues
+        this.renderUsersTeam();
+        this.getAllLeagues();
+      })
+      .catch((error) => {
+        console.log("Error updating document: ", error);
+      })
+    }
+    // Update new league roster with user
     fireStore.collection("leagues").doc(league).get()
     .then((doc) => {
       // League roster from new team
@@ -120,35 +174,6 @@ class JoinLeague extends Component {
       fireStore.collection("leagues").doc(league).update({
         roster: roster
       })
-    })
-    console.log(this.state.my_teammates);
-    // Retrieve index from old league roster
-    let index = this.state.my_teammates.indexOf(this.props.location.state.name);
-    // Remove user from old league roster
-    let my_old_teammates = this.state.my_teammates;
-    my_old_teammates.splice(index, 1);
-    console.log(index, my_old_teammates);
-    // Delete user from old league roster in firestore
-    fireStore.collection("leagues").doc(this.state.my_league).update({
-      roster: my_old_teammates
-    })
-    // Update user's league affiliation
-    fireStore.collection("users").doc(this.props.location.state.name).update({
-      league: league
-    })
-    .then(() => {
-      console.log("Document successfully updated");
-      // Update user's league affiliation to state
-      this.setState({
-        my_league: league
-      })
-      // Re-render league info, call renderUsersTeam and getAllLeagues
-      this.forceUpdate();
-      this.renderUsersTeam();
-      this.getAllLeagues();
-    })
-    .catch((error) => {
-      console.log("Error updating document: ", error);
     })
   }
   
@@ -179,14 +204,16 @@ class JoinLeague extends Component {
               }
               <td>
                 <table>
-                  {this.state.my_teammates.map((teammate, index) => {
-                    return (
-                        <tr key={index}>
-                          <td>{teammate}</td>
-                        </tr>
-                    )
-                  })}
-                  {no_teammates}
+                  <tbody>
+                    {this.state.my_teammates.map((teammate, index) => {
+                      return (
+                          <tr key={index}>
+                            <td>{teammate}</td>
+                          </tr>
+                      )
+                    })}
+                    {no_teammates}
+                  </tbody>
                 </table>
               </td>
             </tr>
