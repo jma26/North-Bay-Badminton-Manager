@@ -24,10 +24,12 @@ class JoinLeague extends Component {
   getAllLeagues() {
     fireStore.collection('leagues').get()
     .then((querySnapshot) => {
+      let queryAllLeagues = []
       querySnapshot.forEach((doc) => {
-        this.setState({
-          'leagues': [...this.state.leagues, doc.id]
-        })
+        queryAllLeagues.push(doc.id);
+      })
+      this.setState({
+        'leagues': [...queryAllLeagues]
       })
     })
     .catch((error) => {
@@ -51,7 +53,7 @@ class JoinLeague extends Component {
           let roster = doc.data().roster
           // Assign user's league teammates to state
           this.setState({
-            'my_teammates': [...roster]
+            'my_teammates': [roster]
           })
         } else {
           console.log("Document does not exist!");
@@ -141,6 +143,7 @@ class JoinLeague extends Component {
         my_league: league
       })
       // Re-render league info, call renderUsersTeam and getAllLeagues
+      this.forceUpdate();
       this.renderUsersTeam();
       this.getAllLeagues();
     })
