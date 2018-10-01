@@ -64,7 +64,7 @@ class Register extends Component {
         fireStore.collection('users').doc(this.state.fullName).set({
           fullName: this.state.fullName,
           email: this.state.email,
-          'league': null
+          'league': ''
         })
         this.setState({
           'successful_registration': true
@@ -119,7 +119,7 @@ class Register extends Component {
           fireStore.collection('users').doc(user.displayName).set({
             fullName: user.displayName,
             email: user.email,
-            'league': null
+            'league': ''
           })
         }
         this.props.history.push({
