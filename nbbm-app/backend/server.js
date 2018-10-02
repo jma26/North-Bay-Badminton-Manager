@@ -27,45 +27,63 @@ connection.connect((err) => {
 // Pass the same server object to socketIo
 const io = socketIo(server);
 
-let activeUsers = [];
-
 io.on('connection', (socket) => {
   console.log('Hello', socket.id);
-    /* ******************************** */
-    // Need to save activeUsers to database or as an array in server (cheap way)
-    socket.on('new_user', (data) => {
-      // Add new user to array
-      activeUsers.push(data.user);
+
+  // Save active user to mysql db
+  socket.on('new_user', (data) => {
+    connection.query("INSERT INTO `activeusers` (`user`) VALUES ('" + data.user + "')"), (err, db_data) => {
+      console.log(err);
+      console.log(db_data);
+    }
+    // Retrieve all active users again and emit to everybody else
+    connection.query("SELECT `user` FROM `activeusers`", (err, db_data) => {
+      console.log(err);
+      console.log(db_data);
+      let activeUsers = [];
+      for (data of db_data) {
+        activeUsers.push(data.user);
+      }
       console.log(activeUsers);
-      // Send current active users in chatroom to all
-      io.emit("active_users", {'users': activeUsers});
-      // Send socket chat history to user that signed in
-      connection.query("SELECT `Message_content` FROM `messages`", (err, db_data) => {
-        console.log(err);
-        for (let x in db_data) {
-          socket.emit('chat_history', {message: db_data[x].Message_content})
-        }
-      });
+      io.emit("active_users", {'users': activeUsers})
     })
+    // Send socket chat history to user that signed in
+    connection.query("SELECT `message_content` FROM `messages`", (err, db_data) => {
+      console.log(err);
+      for (data of db_data) {
+        socket.emit('chat_history', {message: data.message_content})
+      }
+    });
+  })
+
   // Receive message
   socket.on('send_message', (data) => {
     console.log(data);
     // Save socket chat message into mysql db
-    connection.query("INSERT INTO `messages` (`Message_content`) VALUES ('" + data.message + "')", (err, db_data) => {
+    connection.query("INSERT INTO `messages` (`message_content`) VALUES ('" + data.message + "')", (err, db_data) => {
       console.log(err);
     });
     io.emit('send_received_message', data);
   })
+
   // Disconnect from socket when user navigates away
   socket.on('disconnect_user', (data) => {
     console.log('Disconnecting data', data);
-    // Find index of the user
-    let index = activeUsers.indexOf(data.user);
-    console.log("User's index is", index);
-    // Pop the user out of the array
-    activeUsers.splice(index, 1);
-    // Update all users with array
-    io.emit("active_users", {'users': activeUsers})
+    // Delete active user from mysql
+    connection.query("DELETE FROM `activeusers` WHERE `user` = '" + data.user + "'", (err, db_data) => {
+      console.log(err);
+      console.log(db_data);
+    });
+    // Retrieve all active users again and emit to everybody else
+    connection.query("SELECT `user` FROM `activeusers`", (err, db_data) => {
+      console.log(err);
+      console.log(db_data);
+      let activeUsers = [];
+      for (data of db_data) {
+        activeUsers.push(data.user);
+      }
+      io.emit("active_users", {'users': activeUsers})
+    });
     socket.removeAllListeners();
   })
 })
