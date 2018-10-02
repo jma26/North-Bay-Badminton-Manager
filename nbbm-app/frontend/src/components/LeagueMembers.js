@@ -10,8 +10,11 @@ class LeagueMembers extends Component {
       <div className="LeagueMembers">
         <h4> Teammates </h4>
         <ol className="teammate-list">
-          <li> Jacob </li>
-          <li> Nolan </li>
+          {this.props.teammates.map((teammate, index) => {
+            return (
+            <li key={index}>{teammate}</li>
+            )
+          })}
         </ol>
       </div>
     )
