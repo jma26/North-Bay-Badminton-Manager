@@ -84,7 +84,8 @@ io.on('connection', (socket) => {
       }
       io.emit("active_users", {'users': activeUsers})
     });
-    socket.removeAllListeners();
+    // End socket connection
+    socket.disconnect(true);
   })
 })
 
