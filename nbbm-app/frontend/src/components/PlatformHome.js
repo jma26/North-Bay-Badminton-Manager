@@ -8,7 +8,7 @@ class PlatformHome extends Component {
   render() {
     return (
       <div className="PlatformHome">
-        <League />
+        <League name={this.props.location.state.name} />
         <Calendar />
       </div>
     )
