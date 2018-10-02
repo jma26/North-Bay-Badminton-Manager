@@ -102,8 +102,9 @@ class JoinLeague extends Component {
         this.setState({
           league_name: ''
         })
-        // Re-render league info, call renderUsersTeam
+        // Re-render league info, call renderUsersTeam and getAllLeagues
         this.renderUsersTeam();
+        this.getAllLeagues();
       })
       .catch((error) => {
         console.log("Error updating document: ", error);
