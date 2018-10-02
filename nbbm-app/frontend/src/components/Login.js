@@ -129,7 +129,7 @@ class Login extends Component {
           <form className="login-form" onSubmit={(e) => this.handleLogin(e)}>
             <div>
               <label className={['email', 'input-field'].join(' ')}>
-                <input type="text" name="email" value={this.state.email} placeholder="Email Address" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
+                <input type="text" name="email" value={this.state.email} placeholder="Email Address" autoComplete="off" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
               {error_emails}
             </div>

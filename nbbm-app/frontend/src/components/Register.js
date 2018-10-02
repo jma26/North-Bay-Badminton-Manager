@@ -189,13 +189,13 @@ class Register extends Component {
           <form className="register-form" onSubmit={(e) => this.handleRegistration(e, "manual")}>
             <div>
               <label className={['user', 'input-field'].join(' ')} >
-                <input type="text" name="fullName" value={this.state.fullName} placeholder="Enter Full Name" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
+                <input type="text" name="fullName" value={this.state.fullName} placeholder="Enter Full Name" autoComplete="off" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
               {error_no_name}
             </div>
             <div>
               <label className={['email', 'input-field'].join(' ')}>
-                <input type="text" name="email" value={this.state.email} placeholder="Email Address" autoComplete="disabled" onChange={(e) => this.handleChange(e)} className="input-text" />
+                <input type="text" name="email" value={this.state.email} placeholder="Email Address" autoComplete="off" onChange={(e) => this.handleChange(e)} className="input-text" />
               </label>
               {error_emails}
               {error_email_in_use}
