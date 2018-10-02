@@ -28,10 +28,12 @@ connection.connect((err) => {
 const io = socketIo(server);
 
 io.on('connection', (socket) => {
+  var current_user;
   console.log('Hello', socket.id);
 
   // Save active user to mysql db
   socket.on('new_user', (data) => {
+    current_user = data.user;
     connection.query("INSERT INTO `activeusers` (`user`) VALUES ('" + data.user + "')"), (err, db_data) => {
       console.log(err);
       console.log(db_data);
@@ -84,8 +86,27 @@ io.on('connection', (socket) => {
       }
       io.emit("active_users", {'users': activeUsers})
     });
-    // End socket connection
+  })
+  
+  // End socket connection if browser window closes
+  socket.on('disconnect', () => {
     socket.disconnect(true);
+    console.log('Disconnecting user', socket.id);
+    // Delete active user from mysql
+    connection.query("DELETE FROM `activeusers` WHERE `user` = '" + current_user + "'", (err, db_data) => {
+      console.log(err);
+      console.log(db_data);
+    });
+    // Retrieve all active users again and emit to everybody else
+    connection.query("SELECT `user` FROM `activeusers`", (err, db_data) => {
+      console.log(err);
+      console.log(db_data);
+      let activeUsers = [];
+      for (data of db_data) {
+        activeUsers.push(data.user);
+      }
+      io.emit("active_users", {'users': activeUsers})
+    });
   })
 })
 
