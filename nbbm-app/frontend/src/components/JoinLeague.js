@@ -140,6 +140,8 @@ class JoinLeague extends Component {
       this.setState({
         league_name: ''
       })
+      // Callback to Platform
+      this.props.shouldLeagueUpdate(league);
       // Re-render league info, call renderUsersTeam and getAllLeagues
       this.renderUsersTeam();
       this.getAllLeagues();
@@ -164,6 +166,8 @@ class JoinLeague extends Component {
         this.setState({
           my_league: league
         })
+        // Callback to Platform
+        this.props.shouldLeagueUpdate(league);
         // Re-render league info, call renderUsersTeam and getAllLeagues
         this.renderUsersTeam();
         this.getAllLeagues();
@@ -202,7 +206,7 @@ class JoinLeague extends Component {
       fireStore.collection('leagues').doc(this.state.my_league).get()
       .then((doc) => {
         let roster = doc.data().roster
-        console.log('Captain of the leageu is: ', doc.data().captain);
+        console.log('Captain of the old league is: ', doc.data().captain);
         // Relinquish user of captain status of old league
         if (doc.data().captain === this.props.location.state.name) {
           fireStore.collection('leagues').doc(this.state.my_league).update({
@@ -234,6 +238,8 @@ class JoinLeague extends Component {
         this.setState({
           my_league: league
         })
+        // Callback to Platform
+        this.props.shouldLeagueUpdate(league);
         // Re-render league info, call renderUsersTeam and getAllLeagues
         this.renderUsersTeam();
         this.getAllLeagues();

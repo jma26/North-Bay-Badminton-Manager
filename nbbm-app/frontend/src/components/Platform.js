@@ -2,13 +2,67 @@ import React, { Component } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import './Platform.css';
 
-import { firebaseApp } from '../config/firebase';
+import { firebaseApp, fireStore } from '../config/firebase';
 
 import SocketChat from './SocketChat';
 import PlatformHome from './PlatformHome';
 import JoinLeague from './JoinLeague';
 
 class Platform extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      'captain': false,
+      'my_league': ''
+    }
+    this.updateLeague = this.updateLeague.bind(this);
+  }
+
+  updateLeague(new_league) {
+    console.log(new_league);
+    this.setState({
+      'my_league': new_league
+    })
+    console.log('Forcing a re-rendering....');
+    // Retrieve user info
+    fireStore.collection('users').doc(this.props.location.state.name).get()
+    .then((userInfo) => {
+      console.log(userInfo);
+      this.setState({
+        'my_league': userInfo.data().league
+      })
+      return userInfo
+    })
+    .catch((error) => {
+      console.log('Error retrieving document: ', error);
+    })
+    // Chain the userInfo into retrieving league info of user
+    .then((userInfo) => {
+      if (userInfo.data().league === '') {
+        console.log('User is not in a league');
+      } else {
+        fireStore.collection('leagues').doc(userInfo.data().league).get()
+        // Check if user is captain of the league
+        .then((leagueInfo) => {
+          console.log(leagueInfo.data().captain);
+          if (userInfo.data().fullName === leagueInfo.data().captain) {
+            console.log('You are the captain!', leagueInfo.data().captain);
+            this.setState({
+              'captain': true
+            })
+          } else {
+            this.setState({
+              'captain': false
+            })
+          }
+        })
+      }
+    })
+    .catch((error) => {
+      console.log('Error retrieving document: ', error);
+    })
+  }
+
   handleLogout() {
     firebaseApp
     .auth()
@@ -61,9 +115,60 @@ class Platform extends Component {
         console.log('Signed in: ', auth2.isSignedIn.get());
       })
     })
+
+    // Retrieve user info
+    fireStore.collection('users').doc(this.props.location.state.name).get()
+    .then((userInfo) => {
+      console.log(userInfo);
+      this.setState({
+        'my_league': userInfo.data().league
+      })
+      return userInfo
+    })
+    .catch((error) => {
+      console.log('Error retrieving document: ', error);
+    })
+    // Chain the userInfo into retrieving league info of user
+    .then((userInfo) => {
+      if (userInfo.data().league === '') {
+        console.log('User is not in a league');
+      } else {
+        fireStore.collection('leagues').doc(userInfo.data().league).get()
+        // Check if user is captain of the league
+        .then((leagueInfo) => {
+          console.log(leagueInfo.data().captain);
+          if (userInfo.data().fullName === leagueInfo.data().captain) {
+            console.log('You are the captain!', leagueInfo.data().captain);
+            this.setState({
+              'captain': true
+            })
+          } else {
+            this.setState({
+              'captain': false
+            })
+          }
+        })
+      }
+    })
+    .catch((error) => {
+      console.log('Error retrieving document: ', error);
+    })
   }
 
   render() {
+    var createEventBtn;
+    if (this.state.captain) {
+      createEventBtn = <button className="platformlinks-event platformlinks">
+        <Link to={{
+          pathname: '/platform/createvent',
+          state: {
+            'name': this.props.location.state.name,
+            'email': this.props.location.state.email
+          }
+        }} style={{textDecoration: 'none'}}> Create event </Link>
+      </button>
+    }
+
     return (
       <div className="Platform">
         <nav>
@@ -94,12 +199,15 @@ class Platform extends Component {
               }
             }} style={{textDecoration: 'none'}}> Join a League! </Link>
           </button>
+          {createEventBtn}
           <button className="platformlinks-logout platformlink" onClick={() => this.handleLogout()}> Logout </button>
         </nav>
         <Route path="/platform/home" component={ PlatformHome } />
         <Switch>
           <Route path="/platform/chat" component={ SocketChat } />
-          <Route path="/platform/joinleague" component={ JoinLeague } />
+          <Route path="/platform/joinleague" render={(props) => (
+            <JoinLeague {...props} shouldLeagueUpdate={this.updateLeague} />
+          )} />
         </Switch>
       </div>
     )
