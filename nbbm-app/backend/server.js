@@ -86,11 +86,11 @@ io.on('connection', (socket) => {
       }
       io.emit("active_users", {'users': activeUsers})
     });
+    socket.disconnect(true);
   })
   
   // End socket connection if browser window closes
   socket.on('disconnect', () => {
-    socket.disconnect(true);
     console.log('Disconnecting user', socket.id);
     // Delete active user from mysql
     connection.query("DELETE FROM `activeusers` WHERE `user` = '" + current_user + "'", (err, db_data) => {
@@ -116,3 +116,5 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
+
+// Post new event

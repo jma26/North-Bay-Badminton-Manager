@@ -11,20 +11,26 @@ BigCalendar.momentLocalizer(moment);
 class Calendar extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      'events': []
+    }
   }
+
   render() {
     const testEvents = [{
+      id : 0,
+      title: 'Testing',
       allDay: false,
-      end: new Date('September 07, 2018 05:00:00'),
-      start: new Date('September 08, 2018 08:00:00'),
-      title: 'Test1'
+      start: new Date('2018 10 03 11:00:00'),
+      end: new Date('2018-10-03 13:00:00')
     }]
     return (
       <div className="calendar">
         <BigCalendar
           events={testEvents}
-          startAccessor='startDate'
-          endAccessor='endDate'
+          startAccessor='start'
+          endAccessor='end'
+          views={['month', 'day', 'agenda']}
         />
       </div>
     )
