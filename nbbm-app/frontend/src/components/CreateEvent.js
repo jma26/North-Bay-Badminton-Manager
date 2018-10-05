@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './CreateEvent.css';
 
+import axios from 'axios';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class CreateEvent extends Component {
@@ -32,6 +34,14 @@ class CreateEvent extends Component {
       start: JSON.stringify(new_start_date),
       end: JSON.stringify(new_end_date)
     }
+
+    axios.post('http://localhost:8000/newevent', { event })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   handleChange(e) {
