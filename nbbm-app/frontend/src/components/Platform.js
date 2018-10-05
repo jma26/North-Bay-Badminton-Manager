@@ -7,6 +7,7 @@ import { firebaseApp, fireStore } from '../config/firebase';
 import SocketChat from './SocketChat';
 import PlatformHome from './PlatformHome';
 import JoinLeague from './JoinLeague';
+import CreateEvent from './CreateEvent';
 
 class Platform extends Component {
   constructor(props) {
@@ -160,7 +161,7 @@ class Platform extends Component {
     if (this.state.captain) {
       createEventBtn = <button className="platformlinks-event platformlinks">
         <Link to={{
-          pathname: '/platform/createvent',
+          pathname: '/platform/createevent',
           state: {
             'name': this.props.location.state.name,
             'email': this.props.location.state.email
@@ -208,6 +209,7 @@ class Platform extends Component {
           <Route path="/platform/joinleague" render={(props) => (
             <JoinLeague {...props} shouldLeagueUpdate={this.updateLeague} />
           )} />
+          <Route path="/platform/createevent" component={ CreateEvent } />
         </Switch>
       </div>
     )
