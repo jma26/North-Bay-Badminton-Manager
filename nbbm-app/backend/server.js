@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const express = require('express');
 const socketIo = require('socket.io');
+const bodyParser = require('body-parser');
 const app = express();
 
 const connection = mysql.createConnection({
@@ -10,6 +11,11 @@ const connection = mysql.createConnection({
   database: 'NorthBayBadminton',
   port: 3306
 });
+
+// Handle JSON data
+app.use(bodyParser.json());
+// Handle URL-encoded data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Port 
 const port = process.env.PORT || 8000;
@@ -118,3 +124,6 @@ app.use((req, res, next) => {
 })
 
 // Post new event
+app.post('/newevent', (req, res) => {
+  console.log(req.body);
+})
