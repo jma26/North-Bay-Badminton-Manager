@@ -19,6 +19,19 @@ class CreateEvent extends Component {
   submitNewEvent(e) {
     e.preventDefault();
     console.log(this.state);
+    // Concatenate time with date
+    let start_date = `${this.state.start} ${this.state.startTime}`
+    let end_date = `${this.state.end} ${this.state.endTime}`
+    // Create new date object
+    let new_start_date = new Date(start_date);
+    let new_end_date = new Date(end_date);
+    // Stringify for mysql storage and store in event object
+    let event = {
+      title: this.state.title,
+      allDay: this.state.allDay,
+      start: JSON.stringify(new_start_date),
+      end: JSON.stringify(new_end_date)
+    }
   }
 
   handleChange(e) {
@@ -45,18 +58,19 @@ class CreateEvent extends Component {
           <div>
             <label className="start">
               <FontAwesomeIcon className="start" icon="hourglass-start" />
-              <input type="date" name="start" onChange={(e) => this.handleChange(e)} required></input>
+              <input type="date" name="start" onChange={(e) => this.handleChange(e)} ></input>
               <input type="time" name="startTime" min="7:00" max="20:00" onChange={(e) => this.handleChange(e)}
-              required></input>
+              ></input>
             </label>
           </div>
           <div>
             <label className="end">
             <FontAwesomeIcon className="end" icon="hourglass-end" />
-              <input type="date" name="end" onChange={(e) => this.handleChange(e)} required></input>
-              <input type="time" name="endTime" min="7:00" max="24:00" onChange={(e) => this.handleChange(e)} required></input>
+              <input type="date" name="end" onChange={(e) => this.handleChange(e)} ></input>
+              <input type="time" name="endTime" min="7:00" max="24:00" onChange={(e) => this.handleChange(e)} ></input>
             </label>
           </div>
+          <input type="submit" value="Create event" className="create-event-btn" />
         </form>
       </div>
     )
