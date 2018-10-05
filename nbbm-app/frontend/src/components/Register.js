@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import { fireStore, firebaseApp, firebaseMain } from '../config/firebase';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faLock, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faEnvelope, faLock, faAngleLeft, faHourglassStart, faHourglassEnd } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUser, faEnvelope, faLock, faAngleLeft);
+library.add(faUser, faEnvelope, faLock, faAngleLeft, faHourglassStart, faHourglassEnd);
 
 class Register extends Component {
   constructor(props) {
