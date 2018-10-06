@@ -35,7 +35,7 @@ class CreateEvent extends Component {
       end: JSON.stringify(new_end_date)
     }
 
-    axios.post('http://localhost:8000/newevent', { event })
+    axios.post('http://localhost:8000/newevent', event)
     .then((response) => {
       console.log(response);
     })
