@@ -126,4 +126,12 @@ app.use((req, res, next) => {
 // Post new event
 app.post('/newevent', (req, res) => {
   console.log(req.body);
+  let data = req.body;
+  // Save event to mysql
+  connection.query("INSERT INTO events (title, allDay, start, end) VALUES ('" + data.title + "', '" + data.allDay + "', " + data.start + ", " + data.end + ")"), (err, db_response) => {
+    console.log(err);
+    console.log(db_response);
+  }
 })
+
+// NOTE: Mysql requires any string to be inside single quotes
