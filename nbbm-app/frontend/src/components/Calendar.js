@@ -1,5 +1,7 @@
 import React,  { Component } from 'react';
 
+import axios from 'axios';
+
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import './BigCalendar.css';
@@ -16,18 +18,36 @@ class Calendar extends Component {
     }
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:8000/getevents')
+    .then((response) => {
+      let events = response.data;
+      events.map((event) => {
+        console.log(event);
+        // Parse date from mysql
+        let parsed_start_date = new Date(event.start);
+        let parsed_end_date = new Date(event.end);
+        // Set new object for current event
+        let current_event = {
+          id: event.id,
+          title: event.Title,
+          allDay: event.AllDay,
+          start: parsed_start_date,
+          end: parsed_end_date,
+        }
+        // Add to state
+        this.setState({
+          'events': [...this.state.events, current_event]
+        })
+      })
+    })
+  }
+
   render() {
-    const testEvents = [{
-      id : 0,
-      title: 'Testing',
-      allDay: false,
-      start: new Date('2018 10 03 11:00:00'),
-      end: new Date('2018-10-03 13:00:00')
-    }]
     return (
       <div className="calendar">
         <BigCalendar
-          events={testEvents}
+          events={this.state.events}
           startAccessor='start'
           endAccessor='end'
           views={['month', 'day', 'agenda']}
