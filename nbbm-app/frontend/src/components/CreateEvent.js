@@ -37,7 +37,16 @@ class CreateEvent extends Component {
 
     axios.post('http://localhost:8000/newevent', event)
     .then((response) => {
-      console.log(response);
+      console.log('Success creating new event: ', response);
+      // Reset state
+      this.setState({
+        title: '',
+        allDay: false,
+        start: '',
+        end: '',
+        startTime: '',
+        endTime: ''
+      })
     })
     .catch((error) => {
       console.log(error);
