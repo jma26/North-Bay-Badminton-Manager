@@ -63,31 +63,34 @@ class CreateEvent extends Component {
     return(
       <div className="CreateEvent">
         <form className="new-event-form" onSubmit={(e) => this.submitNewEvent(e)}>
-          <div>
-            <label className="title"> Name of event
-              <input type="text" name="title" placeholder="Title of event" value={this.state.title} autoComplete="off" onChange={(e) => this.handleChange(e)}></input>
-            </label>
+          <div className="title-container">
+            <input type="text" name="title" placeholder="Name of event..." value={this.state.title} autoComplete="off" onChange={(e) => this.handleChange(e)} />
           </div>
-          <div>
-            <label className="allDay"> All day? 
-              <input type="radio" name="allDay" value="true" onChange={(e) => this.handleChange(e)}></input>
-              <input type="radio" name="allDay" value="false" onChange={(e) => this.handleChange(e)}></input>
-            </label>
+          <div className="allDay-container">
+            <label className="allDay"> All day? </label>
+            <input type="radio" name="allDay" value="true" onChange={(e) => this.handleChange(e)} />
+            <label for="true"> True </label>
+            <input type="radio" name="allDay" value="false" onChange={(e) => this.handleChange(e)} />
+            <label for="false"> False </label>
           </div>
-          <div>
-            <label className="start">
+          <div className="date-container">
+            <div className="start-container">
               <FontAwesomeIcon className="start" icon="hourglass-start" />
-              <input type="date" name="start" onChange={(e) => this.handleChange(e)} ></input>
-              <input type="time" name="startTime" min="7:00" max="20:00" onChange={(e) => this.handleChange(e)}
-              ></input>
-            </label>
-          </div>
-          <div>
-            <label className="end">
-            <FontAwesomeIcon className="end" icon="hourglass-end" />
-              <input type="date" name="end" onChange={(e) => this.handleChange(e)} ></input>
-              <input type="time" name="endTime" min="7:00" max="24:00" onChange={(e) => this.handleChange(e)} ></input>
-            </label>
+              <label for="start"> Start date </label>
+              <div className="date-floater">
+                <input type="date" name="start" onChange={(e) => this.handleChange(e)} />
+                <input type="time" name="startTime" min="7:00" max="20:00" onChange={(e) => this.handleChange(e)}
+                />
+              </div>
+            </div>
+            <div className="end-container">
+              <FontAwesomeIcon className="end" icon="hourglass-end" />
+              <label for="end"> End date </label>
+              <div className="date-floater">
+                <input type="date" name="end" onChange={(e) => this.handleChange(e)} />
+                <input type="time" name="endTime" min="7:00" max="24:00" onChange={(e) => this.handleChange(e)} />
+              </div>
+            </div>
           </div>
           <input type="submit" value="Create event" className="create-event-btn" />
         </form>

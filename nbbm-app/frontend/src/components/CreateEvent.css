@@ -1,7 +1,59 @@
+.new-event-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[name="title"] {
+  padding: 2px;
+}
+
+.allDay-container {
+  color: #FFF;
+  margin-top: 8px;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.start-container, .end-container {
+  margin: 4px 0px;
+}
+
 .start, .end {
   color: #4EB8CE;
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+/* Styling for labels */
+label[for="start"], label[for="end"] {
+  color: #4EB8CE;
+  padding: 2px;
+}
+/* End */
+
+.date-floater {
+  float: right;
+  margin-left: 4px;
+}
+
+input[type="date"] {
+  padding: 2px;
+}
+
+input[type="time"] {
+  padding: 2px;
 }
 
 .allDay, .title {
   color: #FFF;
+}
+
+.create-event-btn {
+  margin-top: 8px;
+  padding: 4px;
 }
