@@ -41,8 +41,30 @@ label[for="start"], label[for="end"] {
   margin-left: 4px;
 }
 
+/* Date time with icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  /* Hides the default black triangle */
+  color: transparent;
+  background: none;
+  z-index: 1;
+}
+
+input[type="date"]:before {
+  background: none;
+  display: block;
+  color: #4EB8CE;
+  content: '\f073';
+  /* This is the calendar icon in FontAwesome */
+  font-family: 'Font Awesome\ 5 Free';
+  font-size: 16px;
+  position: absolute;
+  top: 4px;
+  right: 2px;
+}
+
 input[type="date"] {
   padding: 2px;
+  position: relative;
 }
 
 input[type="time"] {
