@@ -134,4 +134,12 @@ app.post('/newevent', (req, res) => {
   }
 })
 
+// Get all events
+app.get('/getevents', (req, res) => {
+  connection.query("SELECT * FROM events", (err, db_response) => {
+    res.json(db_response);
+    console.log(err);
+  })
+})
+
 // NOTE: Mysql requires any string to be inside single quotes
