@@ -129,9 +129,12 @@ app.post('/newevent', (req, res) => {
   let data = req.body;
   // Save event to mysql
   connection.query("INSERT INTO events (title, allDay, start, end) VALUES ('" + data.title + "', '" + data.allDay + "', " + data.start + ", " + data.end + ")"), (err, db_response) => {
-    console.log(err);
-    console.log(db_response);
+    if (err) {
+      throw err;
+    }
+    console.log('Successful creating new event', db_response);
   }
+  res.json('Successful creating new event');
 })
 
 // Get all events
