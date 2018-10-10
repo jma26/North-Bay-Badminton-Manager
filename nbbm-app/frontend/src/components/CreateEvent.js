@@ -73,21 +73,32 @@ class CreateEvent extends Component {
             <input type="radio" name="allDay" value="false" onChange={(e) => this.handleChange(e)} />
             <label for="false"> False </label>
           </div>
-          <div className="date-container">
+          <div className="event-container">
             <div className="start-container">
-              <FontAwesomeIcon className="start" icon="hourglass-start" />
-              <label for="start"> Start date </label>
-              <div className="date-floater">
+              <div className="start-date">
+                <div className="start-date-label">
+                  <label for="start-date" className="date-time-label"> Start date </label>
+                </div>
                 <input type="date" name="start" onChange={(e) => this.handleChange(e)} />
-                <input type="time" name="startTime" min="7:00" max="20:00" onChange={(e) => this.handleChange(e)}
-                />
+              </div>
+              <div className="start-time">
+                <div className="start-time-label">
+                  <label for="start-time" className="date-time-label"> Start time</label>
+                </div>
+                <input type="time" name="startTime" min="7:00" max="20:00" onChange={(e) => this.handleChange(e)} />
               </div>
             </div>
             <div className="end-container">
-              <FontAwesomeIcon className="end" icon="hourglass-end" />
-              <label for="end"> End date </label>
-              <div className="date-floater">
+              <div className="end-date">
+                <div className="end-date-label">
+                  <label for="end-date" className="date-time-label"> End date </label>
+                </div>
                 <input type="date" name="end" onChange={(e) => this.handleChange(e)} />
+              </div>
+              <div className="end-time">
+                <div className="end-time-label">
+                  <label for="end-time" className="date-time-label"> End time </label>
+                </div>
                 <input type="time" name="endTime" min="7:00" max="24:00" onChange={(e) => this.handleChange(e)} />
               </div>
             </div>

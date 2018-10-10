@@ -5,22 +5,30 @@
 }
 
 input[name="title"] {
-  padding: 2px;
+  padding: 4px;
 }
 
 .allDay-container {
   color: #FFF;
+  margin-top: 16px;
+}
+
+.event-container {
   margin-top: 8px;
 }
 
-.date-container {
+.date-time-label {
+  color: #4EB8CE;
+}
+
+.start-date, .start-time, .end-date, .end-time {
+  margin-top: 8px;
   display: flex;
   flex-direction: column;
-  margin-top: 8px;
 }
 
 .start-container, .end-container {
-  margin: 4px 0px;
+  display: flex;
 }
 
 .start, .end {
@@ -35,11 +43,6 @@ label[for="start"], label[for="end"] {
   padding: 2px;
 }
 /* End */
-
-.date-floater {
-  float: right;
-  margin-left: 4px;
-}
 
 /* Date time with icon */
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -59,16 +62,16 @@ input[type="date"]:before {
   font-size: 16px;
   position: absolute;
   top: 4px;
-  right: 2px;
+  right: 3px;
 }
 
 input[type="date"] {
-  padding: 2px;
+  padding: 4px;
   position: relative;
 }
 
 input[type="time"] {
-  padding: 2px;
+  padding: 4px;
 }
 
 .allDay, .title {
@@ -76,6 +79,9 @@ input[type="time"] {
 }
 
 .create-event-btn {
-  margin-top: 8px;
-  padding: 4px;
+  background-color: #4EB8CE;
+  border: none;
+  color: #FFF;
+  margin-top: 16px;
+  padding: 12px 32px;
 }
