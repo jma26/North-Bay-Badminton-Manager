@@ -23,7 +23,7 @@ input[name="league_name"] {
   padding: 4px;
 }
 
-.create-league-btn {
+.JoinLeague_create-league-btn {
   background-color: #4EB8CE;
   border: none;
   color: #FFF;
@@ -32,39 +32,39 @@ input[name="league_name"] {
   padding: 6px 12px;
 }
 
-.create-league-btn:hover {
+.JoinLeague_create-league-btn:hover {
   transform: translateY(1px);
 }
 
-.league-info {
+.JoinLeague_league-info {
   border-collapse: collapse;
   margin: 16px 0px;
 }
 
-.league-info th {
+.JoinLeague_league-info th {
   border: 1px solid #4EB8CE;
   padding: 4px;
 }
 
-.league-name {
+.JoinLeague_league-name {
   border: 1px solid #4EB8CE;
   padding: 4px;
 }
 
-.league-info > td {
+.JoinLeague_league-info > td {
   border: 1px solid #4EB8CE;
 }
 
-.league-info tr {
+.JoinLeague_league-info tr {
   border: 1px solid #4EB8CE;
 }
 
-.league-teammates td {
+.JoinLeague_league-teammates td {
   padding: 4px;
   width: 100%;
 }
 
-.join-league-btn {
+.JoinLeague_join-league-btn {
   background-color: #4EB8CE;
   border-color: #4EB8CE;
   color: #FFF;
@@ -73,6 +73,6 @@ input[name="league_name"] {
   padding: 6px 12px;
 }
 
-.join-league-btn:focus {
+.JoinLeague_join-league-btn:focus {
   outline: 0
 }

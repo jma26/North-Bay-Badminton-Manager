@@ -273,9 +273,9 @@ class JoinLeague extends Component {
         <form onSubmit={(e) => this.handleLeagueRegistration(e)}>
           <label> Create a new league: </label>
           <input type="text" name="league_name" value={this.state.league_name} placeholder="League name..." onChange={(e) => this.handleChange(e)} />
-          <input className="create-league-btn" type="submit" value="Submit new league" />
+          <input className="JoinLeague_create-league-btn" type="submit" value="Submit new league" />
         </form>
-        <table className="league-info">
+        <table className="JoinLeague_league-info">
           <thead>
             <tr>
               <th> Your League </th>
@@ -285,10 +285,10 @@ class JoinLeague extends Component {
           <tbody>
             <tr>
               {
-                !this.state.my_league ? <td className="league-name"> Not in a league </td> : <td className="league-name"> {this.state.my_league} </td>
+                !this.state.my_league ? <td className="JoinLeague_league-name"> Not in a league </td> : <td className="JoinLeague_league-name"> {this.state.my_league} </td>
               }
               <td>
-                <table className="league-teammates">
+                <table className="JoinLeague_league-teammates">
                   <tbody>
                     {this.state.my_teammates.map((teammate, index) => {
                       return (
@@ -304,7 +304,7 @@ class JoinLeague extends Component {
             </tr>
           </tbody>
         </table>
-        <table className="available-leagues">
+        <table className="JoinLeague_available-leagues">
           <thead>
             <tr>
               <th> Available Leagues </th>
@@ -315,7 +315,7 @@ class JoinLeague extends Component {
               return (
               <tr key={index}>
                 <td>{league}</td>
-                <td> <button className="join-league-btn" onClick={() => this.joinleague(league)}> Join </button></td>
+                <td> <button className="JoinLeague_join-league-btn" onClick={() => this.joinleague(league)}> Join </button></td>
               </tr>
               )
             })}
