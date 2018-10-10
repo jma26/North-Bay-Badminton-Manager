@@ -27,11 +27,13 @@ class Calendar extends Component {
         // Parse date from mysql
         let parsed_start_date = new Date(event.start);
         let parsed_end_date = new Date(event.end);
+        // Parse allDay boolean from mysql
+        let parsed_allDay = JSON.parse(event.AllDay);
         // Set new object for current event
         let current_event = {
           id: event.id,
           title: event.Title,
-          allDay: event.AllDay,
+          allDay: parsed_allDay,
           start: parsed_start_date,
           end: parsed_end_date,
         }
