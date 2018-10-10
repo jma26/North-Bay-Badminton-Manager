@@ -69,37 +69,37 @@ class CreateEvent extends Component {
           <div className="allDay-container">
             <label className="allDay"> All day? </label>
             <input type="radio" name="allDay" value="true" onChange={(e) => this.handleChange(e)} />
-            <label for="true"> True </label>
-            <input type="radio" name="allDay" value="false" onChange={(e) => this.handleChange(e)} />
-            <label for="false"> False </label>
+            <label htmlFor="true"> True </label>
+            <input type="radio" name="allDay" value="false" onChange={(e) => this.handleChange(e)} defaultChecked />
+            <label htmlFor="false"> False </label>
           </div>
           <div className="event-container">
             <div className="start-container">
               <div className="start-date">
                 <div className="start-date-label">
-                  <label for="start-date" className="date-time-label"> Start date </label>
+                  <label htmlFor="start-date" className="date-time-label"> Start date </label>
                 </div>
-                <input type="date" name="start" onChange={(e) => this.handleChange(e)} />
+                <input type="date" name="start" onChange={(e) => this.handleChange(e)} required />
               </div>
               <div className="start-time">
                 <div className="start-time-label">
-                  <label for="start-time" className="date-time-label"> Start time</label>
+                  <label htmlFor="start-time" className="date-time-label"> Start time</label>
                 </div>
-                <input type="time" name="startTime" min="7:00" max="20:00" onChange={(e) => this.handleChange(e)} />
+                <input type="time" name="startTime" min="7:00" max="20:00" onChange={(e) => this.handleChange(e)}  required />
               </div>
             </div>
             <div className="end-container">
               <div className="end-date">
                 <div className="end-date-label">
-                  <label for="end-date" className="date-time-label"> End date </label>
+                  <label htmlFor="end-date" className="date-time-label"> End date </label>
                 </div>
-                <input type="date" name="end" onChange={(e) => this.handleChange(e)} />
+                <input type="date" name="end" onChange={(e) => this.handleChange(e)} required />
               </div>
               <div className="end-time">
                 <div className="end-time-label">
-                  <label for="end-time" className="date-time-label"> End time </label>
+                  <label htmlFor="end-time" className="date-time-label"> End time </label>
                 </div>
-                <input type="time" name="endTime" min="7:00" max="24:00" onChange={(e) => this.handleChange(e)} />
+                <input type="time" name="endTime" min="7:00" max="24:00" onChange={(e) => this.handleChange(e)} required />
               </div>
             </div>
           </div>
