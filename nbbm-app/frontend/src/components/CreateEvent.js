@@ -17,7 +17,7 @@ class CreateEvent extends Component {
       endTime: ''
     }
   }
-
+  
   submitNewEvent(e) {
     e.preventDefault();
     console.log(this.state);
@@ -37,6 +37,7 @@ class CreateEvent extends Component {
 
     axios.post('http://localhost:8000/newevent', event)
     .then((response) => {
+      alert('Success! New event added');
       console.log('Success creating new event: ', response);
       // Reset state
       this.setState({
