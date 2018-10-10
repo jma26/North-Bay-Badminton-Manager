@@ -3,22 +3,22 @@
   color: #FFF;
 }
 
-.league-name {
+.League_league-name {
   text-align: center;
   padding: 16px;
 }
 
-.league-rankings {
+.League_league-rankings {
   border-collapse: collapse;
   margin-top: 8px;
 }
 
-.league-rankings th {
+.League_league-rankings th {
   text-align: left;
   border: 1px solid #4EB8CE;
-  padding: 2px;
+  padding: 4px;
 }
 
-.league-rankings td {
+.League_league-rankings td {
   padding: 4px;
 }

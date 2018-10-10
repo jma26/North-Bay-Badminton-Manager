@@ -76,9 +76,9 @@ class League extends Component {
   render() {
     return (
       <div className="League">
-        <h4 className="league-name"> {this.state.my_league ? this.state.my_league : 'Not in a league, join one now!'} </h4>
+        <h4 className="League_league-name"> {this.state.my_league ? this.state.my_league : 'Not in a league, join one now!'} </h4>
         <LeagueMembers teammates={this.state.my_teammates}/>
-        <table className="league-rankings">
+        <table className="League_league-rankings">
           <thead>
             <tr>
               <th> Leagues </th>
