@@ -88,3 +88,12 @@ input[type="time"] {
   margin-top: 16px;
   padding: 12px 32px;
 }
+
+.create-event-btn:hover {
+  cursor: pointer;
+  transform: translateY(2px);
+}
+
+.create-event-btn:focus {
+  transform: translateY(4px);
+}
