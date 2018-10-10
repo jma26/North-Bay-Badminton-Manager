@@ -67,7 +67,9 @@ input[type="date"]:before {
 
 input[type="date"] {
   padding: 4px;
+  /* Necessary for fontawesome icon */
   position: relative;
+  width: 90%;
 }
 
 input[type="time"] {
