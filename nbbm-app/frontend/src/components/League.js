@@ -75,13 +75,13 @@ class League extends Component {
 
   render() {
     return (
-      <div className="league">
-        <h4> {this.state.my_league ? this.state.my_league : 'Not in a league, join one now!'} </h4>
+      <div className="League">
+        <h4 className="league-name"> {this.state.my_league ? this.state.my_league : 'Not in a league, join one now!'} </h4>
         <LeagueMembers teammates={this.state.my_teammates}/>
         <table className="league-rankings">
           <thead>
             <tr>
-              <th> League Names </th>
+              <th> Leagues </th>
               <th> Wins </th>
               <th> Losses </th>
             </tr>
@@ -91,6 +91,8 @@ class League extends Component {
               return (
                 <tr key={index}>
                   <td>{league}</td>
+                  <td> 0 </td>
+                  <td> 0 </td>
                 </tr>
               )
             })}
