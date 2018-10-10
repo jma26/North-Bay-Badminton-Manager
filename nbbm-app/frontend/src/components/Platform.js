@@ -166,7 +166,7 @@ class Platform extends Component {
             'name': this.props.location.state.name,
             'email': this.props.location.state.email
           }
-        }} style={{textDecoration: 'none', color: '#FFF'}}> Create event </Link>
+        }} style={{textDecoration: 'none', color: '#FFF', letterSpacing: '1px'}}> Create event </Link>
       </button>
     }
 
@@ -180,7 +180,7 @@ class Platform extends Component {
                 'name': this.props.location.state.name,
                 'email': this.props.location.state.email
               }
-            }} style={{textDecoration: 'none', color: '#FFF'}}> Home </Link>
+            }} style={{textDecoration: 'none', color: '#FFF', letterSpacing: '1px'}}> Home </Link>
           </button>
           <button className="platformlinks-chat platformlinks">
             <Link to={{
@@ -189,7 +189,7 @@ class Platform extends Component {
                 'name': this.props.location.state.name,
                 'email': this.props.location.state.email
               }
-            }} style={{textDecoration: 'none', color: '#FFF'}}> Chatroom </Link>
+            }} style={{textDecoration: 'none', color: '#FFF', letterSpacing: '1px'}}> Chatroom </Link>
           </button>
           <button className="platformlinks-league platformlinks">
             <Link to={{
@@ -198,7 +198,7 @@ class Platform extends Component {
                 'name': this.props.location.state.name,
                 'email': this.props.location.state.email
               }
-            }} style={{textDecoration: 'none', color: '#FFF'}}> Join a League </Link>
+            }} style={{textDecoration: 'none', color: '#FFF', letterSpacing: '1px'}}> Join a League </Link>
           </button>
           {createEventBtn}
           <button className="platformlinks-logout platformlinks" onClick={() => this.handleLogout()}> Logout </button>

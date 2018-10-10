@@ -5,18 +5,18 @@
 }
 
 .Platform nav {
-  padding: 16px;
+  padding: 16px 8px;
 }
 
-.Platform nav button {
-  padding: 4px;
-}
-
-/* Nth-of-type() indicates what element position or # selected */
 .platformlinks {
+  border: none;
+  color: #FFF;
+  background-color: #4EB8CE;
   margin-right: 8px;
+  padding: 4px 12px;
 }
 
 .platformlinks-logout {
+  letter-spacing: 1px;
   float: right;
 }
