@@ -12,5 +12,6 @@
 .register-link {
   align-self: center;
   color: #FFF;
+  letter-spacing: 1px;
   text-decoration: none;
 }
