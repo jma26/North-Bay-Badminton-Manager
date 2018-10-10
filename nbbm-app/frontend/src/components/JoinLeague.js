@@ -271,9 +271,9 @@ class JoinLeague extends Component {
     return (
       <div className="JoinLeague">
         <form onSubmit={(e) => this.handleLeagueRegistration(e)}>
-          <label> Create a new league below! </label>
-          <input type="text" name="league_name" value={this.state.league_name} placeholder="League name" onChange={(e) => this.handleChange(e)} />
-          <input type="submit" value="Submit" />
+          <label> Create a new league: </label>
+          <input type="text" name="league_name" value={this.state.league_name} placeholder="League name..." onChange={(e) => this.handleChange(e)} />
+          <input className="create-league-btn" type="submit" value="Submit new league" />
         </form>
         <table className="league-info">
           <thead>
@@ -285,10 +285,10 @@ class JoinLeague extends Component {
           <tbody>
             <tr>
               {
-                !this.state.my_league ? <td> Not in a league </td> : <td> {this.state.my_league} </td>
+                !this.state.my_league ? <td className="league-name"> Not in a league </td> : <td className="league-name"> {this.state.my_league} </td>
               }
               <td>
-                <table>
+                <table className="league-teammates">
                   <tbody>
                     {this.state.my_teammates.map((teammate, index) => {
                       return (
@@ -315,7 +315,7 @@ class JoinLeague extends Component {
               return (
               <tr key={index}>
                 <td>{league}</td>
-                <td> <button onClick={() => this.joinleague(league)}> Join </button></td>
+                <td> <button className="join-league-btn" onClick={() => this.joinleague(league)}> Join </button></td>
               </tr>
               )
             })}

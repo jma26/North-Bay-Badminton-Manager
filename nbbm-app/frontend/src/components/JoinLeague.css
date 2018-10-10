@@ -1,5 +1,6 @@
 .JoinLeague {
   color: #FFF;
+  padding: 4px 12px;
 }
 
 .JoinLeague p {
@@ -16,4 +17,62 @@
 
 .JoinLeague th {
   text-align: left;
+}
+
+input[name="league_name"] {
+  padding: 4px;
+}
+
+.create-league-btn {
+  background-color: #4EB8CE;
+  border: none;
+  color: #FFF;
+  letter-spacing: 1px;
+  margin-left: 8px;
+  padding: 6px 12px;
+}
+
+.create-league-btn:hover {
+  transform: translateY(1px);
+}
+
+.league-info {
+  border-collapse: collapse;
+  margin: 16px 0px;
+}
+
+.league-info th {
+  border: 1px solid #4EB8CE;
+  padding: 4px;
+}
+
+.league-name {
+  border: 1px solid #4EB8CE;
+  padding: 4px;
+}
+
+.league-info > td {
+  border: 1px solid #4EB8CE;
+}
+
+.league-info tr {
+  border: 1px solid #4EB8CE;
+}
+
+.league-teammates td {
+  padding: 4px;
+  width: 100%;
+}
+
+.join-league-btn {
+  background-color: #4EB8CE;
+  border-color: #4EB8CE;
+  color: #FFF;
+  letter-spacing: 1px;
+  margin-left: 16px;
+  padding: 6px 12px;
+}
+
+.join-league-btn:focus {
+  outline: 0
 }
