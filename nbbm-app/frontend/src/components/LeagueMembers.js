@@ -8,7 +8,7 @@ class LeagueMembers extends Component {
   render() {
     return(
       <div className="LeagueMembers">
-        <h4> Teammates </h4>
+        <h4 className="teammates-headline"> Teammates </h4>
         <ol className="teammate-list">
           {this.props.teammates.map((teammate, index) => {
             return (
