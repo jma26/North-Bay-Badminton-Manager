@@ -9,6 +9,9 @@ Download dependencies
 Build (/frontend)
 * npm run build
 
+Import schema to mysql workbench
+* schema is located in /backend/mysql_schema folder
+
 Start server (/backend)
 * nodemon
 
